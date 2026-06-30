@@ -90,6 +90,7 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
   const { t } = useLang();
   const router = useRouter();
   const [activeIdx, setActiveIdx] = useState(1);
+  const [exitingIdx, setExitingIdx] = useState<number | null>(null);
   const [warming, setWarming] = useState(false);
   const warmingTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const driftRefs = useRef<Array<{ x: number; y: number }>>(
@@ -200,22 +201,21 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
               ref={(el) => {
                 plateRefs.current[i] = el;
               }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                delay: delays[i],
-                duration: 1.2,
-                ease: [0.2, 0.7, 0.2, 1],
-              }}
+              initial={{ opacity: 0, scale: 1 }}
+              animate={
+                exitingIdx === i
+                  ? { opacity: 0, scale: 1.35 }
+                  : { opacity: 1, scale: 1 }
+              }
+              transition={
+                exitingIdx === i
+                  ? { duration: 0.4, ease: [0.2, 0.7, 0.2, 1] }
+                  : { delay: delays[i], duration: 1.2, ease: [0.2, 0.7, 0.2, 1] }
+              }
               onMouseEnter={() => handleSetActive(i)}
               onClick={() => {
-                const el = plateRefs.current[i] as HTMLElement | null;
-                if (!el) return;
-                el.style.transition =
-                  "transform 600ms cubic-bezier(.2,.7,.2,1), opacity .6s";
-                el.style.transform = "translate(-50%,-50%) scale(1.4)";
-                el.style.opacity = "0";
-                setTimeout(() => router.push(cfg.href), 500);
+                setExitingIdx(i);
+                setTimeout(() => router.push(cfg.href), 420);
               }}
               className="absolute top-1/2 left-1/2 overflow-hidden cursor-pointer"
               style={
@@ -229,10 +229,9 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                   filter: isActive
                     ? "brightness(1) saturate(1)"
                     : `brightness(${cfg.brightness}) saturate(${cfg.saturation})`,
-                  zIndex: isActive ? 5 : cfg.zIndex,
-                  // Base position + drift compose via CSS variables
+                  zIndex: exitingIdx === i ? 10 : isActive ? 5 : cfg.zIndex,
                   transform: isActive
-                    ? `translate(-50%, -50%) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.activeRot}deg) scale(1.06)`
+                    ? `translate(-50%, -50%) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.activeRot}deg)`
                     : `translate(${cfg.baseX}px, ${cfg.baseY}px) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.baseRot}deg)`,
                   transition:
                     "transform 900ms cubic-bezier(.2,.7,.2,1), box-shadow 600ms cubic-bezier(.4,0,.2,1), filter 600ms cubic-bezier(.4,0,.2,1)",
@@ -322,6 +321,7 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                   transition: "opacity .35s",
                 }}
                 onMouseEnter={() => handleSetActive(i)}
+                onClick={() => router.push(cfg.href)}
               >
                 <span
                   className="font-[family-name:var(--font-display)] font-light text-[84px] leading-[.9] tracking-[.04em] inline-block"

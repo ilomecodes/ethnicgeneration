@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
@@ -36,7 +37,7 @@ function CollectionCard({
       transition={{ duration: 0.9, ease: [0.2, 0.7, 0.2, 1], delay }}
       className="flex flex-col gap-8"
     >
-      <a
+      <Link
         href={href}
         className="block relative overflow-hidden"
         style={{ aspectRatio: "3/4", background: "#ede7d9" }}
@@ -54,7 +55,7 @@ function CollectionCard({
             style={{ objectPosition: "top center" }}
           />
         </div>
-      </a>
+      </Link>
       <div className="flex flex-col items-center text-center gap-3.5 px-3">
         <div
           className="font-[family-name:var(--font-nav)] font-semibold text-[11px] tracking-[.38em] uppercase"
@@ -68,7 +69,7 @@ function CollectionCard({
         >
           {t(nameKey)}
         </h3>
-        <a
+        <Link
           href={href}
           className="font-[family-name:var(--font-nav)] font-semibold text-[11px] tracking-[.32em] uppercase no-underline inline-flex items-center gap-2 mt-1.5 pb-1"
           style={{
@@ -91,7 +92,7 @@ function CollectionCard({
         >
           {t("colCTA")}
           <ArrowRight size={11} strokeWidth={2} />
-        </a>
+        </Link>
       </div>
     </motion.article>
   );
