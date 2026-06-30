@@ -1,23 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { notFound } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ShoppingBag, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { ShoppingBag, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { products } from "@/lib/admin-data";
 import { useCart } from "@/context/CartContext";
 import Nav from "@/components/Nav";
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id);
-  if (!product) return notFound();
-
+export default function ProductPage() {
+  const { id } = useParams<{ id: string }>();
   const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState("");
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [sizeError, setSizeError] = useState(false);
+
+  const product = products.find((p) => p.id === id);
+  if (!product) return notFound();
+
+  const related = products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -37,10 +42,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     setTimeout(() => setAdded(false), 2500);
   };
 
-  const related = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
-
   return (
     <div className="min-h-screen" style={{ background: "#f6f1e6" }}>
       <Nav scrolledPast={true} onOpenDrawer={() => {}} />
@@ -51,18 +52,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-10"
           style={{ fontFamily: "var(--font-nav)" }}
         >
-          <Link href="/" style={{ color: "#9CA3AF" }}>
-            Accueil
-          </Link>
+          <Link href="/" style={{ color: "#9CA3AF" }}>Accueil</Link>
           <span style={{ color: "#D1D5DB" }}>/</span>
-          <Link href="/boutique" style={{ color: "#9CA3AF" }}>
-            Boutique
-          </Link>
+          <Link href="/boutique" style={{ color: "#9CA3AF" }}>Boutique</Link>
           <span style={{ color: "#D1D5DB" }}>/</span>
-          <Link
-            href={`/boutique?categorie=${product.category}`}
-            style={{ color: "#9CA3AF" }}
-          >
+          <Link href={`/boutique?categorie=${product.category}`} style={{ color: "#9CA3AF" }}>
             {product.category}
           </Link>
           <span style={{ color: "#D1D5DB" }}>/</span>
@@ -84,7 +78,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
           {/* Details */}
           <div className="flex flex-col pt-4">
-            {/* Category */}
             <p
               className="text-[11px] font-semibold tracking-[.38em] uppercase mb-3"
               style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}
@@ -92,7 +85,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {product.category} · {product.subcategory}
             </p>
 
-            {/* Name */}
             <h1
               className="font-[family-name:var(--font-display)] font-light text-[42px] leading-tight mb-4"
               style={{ color: "#14110d" }}
@@ -100,7 +92,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {product.name}
             </h1>
 
-            {/* Price */}
             <p
               className="font-[family-name:var(--font-display)] text-3xl font-semibold mb-6"
               style={{ color: "#b08a4a" }}
@@ -108,7 +99,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               {product.priceFormatted}
             </p>
 
-            {/* Description */}
             <p className="text-sm leading-relaxed mb-8" style={{ color: "#6B7280" }}>
               {product.description}
             </p>
@@ -123,9 +113,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   Taille
                 </p>
                 {sizeError && (
-                  <p className="text-xs text-red-500 font-medium">
-                    Veuillez choisir une taille
-                  </p>
+                  <p className="text-xs text-red-500 font-medium">Veuillez choisir une taille</p>
                 )}
               </div>
               <div className="flex flex-wrap gap-2">
@@ -152,22 +140,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <button
               onClick={handleAddToCart}
               className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-[family-name:var(--font-nav)] font-semibold text-sm tracking-[.14em] uppercase transition-all mb-4"
-              style={
-                added
-                  ? { background: "#065f46", color: "#d1fae5" }
-                  : { background: "#14110d", color: "#f6f1e6" }
-              }
+              style={added ? { background: "#065f46", color: "#d1fae5" } : { background: "#14110d", color: "#f6f1e6" }}
             >
               {added ? (
-                <>
-                  <Check size={16} />
-                  Ajouté au panier
-                </>
+                <><Check size={16} />Ajouté au panier</>
               ) : (
-                <>
-                  <ShoppingBag size={16} />
-                  Ajouter au panier
-                </>
+                <><ShoppingBag size={16} />Ajouter au panier</>
               )}
             </button>
 
@@ -179,10 +157,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               Vous souhaitez une version sur mesure ? →
             </Link>
 
-            {/* Divider */}
             <div className="border-t mt-4 mb-4" style={{ borderColor: "rgba(20,17,13,.08)" }} />
 
-            {/* Product details accordion */}
+            {/* Details accordion */}
             <button
               onClick={() => setDetailsOpen(!detailsOpen)}
               className="flex items-center justify-between w-full py-3 text-left"
@@ -193,11 +170,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               >
                 Composition & entretien
               </span>
-              {detailsOpen ? (
-                <ChevronUp size={16} style={{ color: "#9CA3AF" }} />
-              ) : (
-                <ChevronDown size={16} style={{ color: "#9CA3AF" }} />
-              )}
+              {detailsOpen ? <ChevronUp size={16} style={{ color: "#9CA3AF" }} /> : <ChevronDown size={16} style={{ color: "#9CA3AF" }} />}
             </button>
             {detailsOpen && (
               <ul className="mt-2 space-y-2 pb-3">
@@ -209,7 +182,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 ))}
               </ul>
             )}
-
             <div className="border-t mt-1" style={{ borderColor: "rgba(20,17,13,.08)" }} />
           </div>
         </div>
@@ -243,12 +215,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <p className="text-sm font-semibold" style={{ color: "#14110d" }}>
-                    {p.name}
-                  </p>
-                  <p className="text-sm font-bold mt-0.5" style={{ color: "#b08a4a" }}>
-                    {p.priceFormatted}
-                  </p>
+                  <p className="text-sm font-semibold" style={{ color: "#14110d" }}>{p.name}</p>
+                  <p className="text-sm font-bold mt-0.5" style={{ color: "#b08a4a" }}>{p.priceFormatted}</p>
                 </Link>
               ))}
             </div>
