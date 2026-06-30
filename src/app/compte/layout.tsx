@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { User, ShoppingBag, Scissors, LogOut, ArrowLeft } from "lucide-react";
@@ -16,12 +16,14 @@ export default function CompteLayout({ children }: { children: React.ReactNode }
   const { user, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
+    setChecked(true);
     if (!user) router.replace("/connexion");
   }, [user, router]);
 
-  if (!user) return null;
+  if (!checked || !user) return null;
 
   return (
     <div className="min-h-screen" style={{ background: "#f6f1e6" }}>

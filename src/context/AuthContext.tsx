@@ -30,6 +30,21 @@ const MOCK_USER: AuthUser = {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("eg_auth_user");
+      if (stored) setUser(JSON.parse(stored));
+    } catch {}
+    setLoading(false);
+  }, []);
+
+  const persist = (u: AuthUser | null) => {
+    if (u) localStorage.setItem("eg_auth_user", JSON.stringify(u));
+    else localStorage.removeItem("eg_auth_user");
+    setUser(u);
+  };
 
   const login = async (email: string, _password: string) => {
     if (!email.trim()) return { ok: false, error: "Adresse e-mail requise." };
@@ -37,24 +52,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const name = MOCK_USER.email === email.trim().toLowerCase()
       ? MOCK_USER.name
       : email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    setUser({ ...MOCK_USER, name, email: email.trim().toLowerCase() });
+    const u = { ...MOCK_USER, name, email: email.trim().toLowerCase() };
+    persist(u);
     return { ok: true };
   };
 
   const signup = async (name: string, email: string, _password: string) => {
     if (!name.trim() || !email.trim()) return { ok: false, error: "Tous les champs sont requis." };
     const initials = name.trim().split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2);
-    setUser({
-      id: "u-" + Date.now(),
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      memberSince: "Juin 2026",
-      initials,
-    });
+    persist({ id: "u-" + Date.now(), name: name.trim(), email: email.trim().toLowerCase(), memberSince: "Juin 2026", initials });
     return { ok: true };
   };
 
-  const logout = () => setUser(null);
+  const logout = () => persist(null);
+
+  if (loading) return <>{children}</>;
 
   return (
     <AuthContext.Provider value={{ user, login, signup, logout }}>
