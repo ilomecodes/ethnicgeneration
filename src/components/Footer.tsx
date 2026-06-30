@@ -171,15 +171,6 @@ export default function Footer() {
             "radial-gradient(circle at 20% 25%, rgba(246,241,230,.04) 0 30px, transparent 31px), radial-gradient(circle at 80% 70%, rgba(246,241,230,.03) 0 36px, transparent 37px), repeating-linear-gradient(45deg, transparent 0 26px, rgba(246,241,230,.018) 26px 27px), repeating-linear-gradient(-45deg, transparent 0 26px, rgba(246,241,230,.018) 26px 27px)",
         }}
       />
-      {/* Watermark */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-[-18px] left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap leading-none font-[family-name:var(--font-display)] italic font-light"
-        style={{ fontSize: "clamp(28px, 7vw, 220px)", letterSpacing: "-.02em", color: "rgba(246,241,230,.08)" }}
-      >
-        Ethnicgeneration
-      </div>
-
       {/* Nav grid */}
       <motion.div
         ref={ref}

@@ -174,7 +174,23 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
       />
 
       {/* ── MOBILE hero (single card + category tabs) ── */}
-      <div className="md:hidden absolute inset-0 z-10 flex flex-col items-center justify-center gap-7 px-6">
+      <div className="md:hidden absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-6">
+        {/* Tagline — in flow so it doesn't overlap the card */}
+        <div className="flex flex-col items-center gap-1 pointer-events-none text-center">
+          <div
+            className="font-[family-name:var(--font-display)] italic text-[10px] tracking-[.42em] uppercase"
+            style={{ color: "rgba(246,241,230,.35)" }}
+          >
+            — Ethnicgeneration
+          </div>
+          <div
+            className="font-[family-name:var(--font-display)] font-semibold italic text-[20px] tracking-[.04em] leading-snug px-4"
+            style={{ color: "#f6f1e6" }}
+          >
+            {t("tagline")}
+          </div>
+        </div>
+
         <motion.div
           key={activeIdx}
           initial={{ opacity: 0, scale: 0.93 }}
@@ -474,12 +490,12 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
         </button>
       </motion.aside>
 
-      {/* Tagline — above images */}
+      {/* Tagline — above images (desktop only) */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 1, ease: [0.2, 0.7, 0.2, 1] }}
-        className="absolute left-0 right-0 z-20 pointer-events-none flex flex-col items-center gap-1"
+        className="hidden md:flex absolute left-0 right-0 z-20 pointer-events-none flex-col items-center gap-1"
         style={{ top: 88 }}
       >
         <div
