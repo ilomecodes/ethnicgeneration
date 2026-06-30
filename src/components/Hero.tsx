@@ -21,6 +21,7 @@ const PLATE_CONFIG = [
     labelKey: "labelWomen",
     pieces: 24,
     src: "/hero-women.png",
+    objectPosition: "center 5%",
     // base transform (from left:50%, top:50%)
     baseX: -260,
     baseY: -230, // -50% of 460px
@@ -46,6 +47,7 @@ const PLATE_CONFIG = [
     labelKey: "labelKids",
     pieces: 18,
     src: "/hero-kid.png",
+    objectPosition: "center 8%",
     baseX: -180, // -50% of 360px
     baseY: -260, // -50% of 520px
     baseRot: 0,
@@ -70,6 +72,7 @@ const PLATE_CONFIG = [
     labelKey: "labelMen",
     pieces: 21,
     src: "/hero-men.png",
+    objectPosition: "40% 0%",
     baseX: 220,
     baseY: -230, // -50% of 460px
     baseRot: 6,
@@ -260,7 +263,8 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                 src={cfg.src}
                 alt={t(cfg.catKey)}
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: cfg.objectPosition }}
                 sizes="(max-width: 768px) 100vw, 360px"
                 priority={i === 1}
               />
