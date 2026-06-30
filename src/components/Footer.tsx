@@ -256,7 +256,7 @@ export default function Footer() {
             className="block not-italic text-[9px] tracking-[.42em] mt-1"
             style={{ color: "#d9b89a" }}
           >
-            YAOUNDÉ, CAMEROON
+            BOULEVARD DE L&apos;OUA, YAOUNDÉ, CAMEROON
           </span>
         </div>
 

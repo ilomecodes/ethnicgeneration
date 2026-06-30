@@ -173,26 +173,6 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
         }}
       />
 
-      {/* Edge meta */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 1 }}
-        className="absolute top-24 left-12 z-[25] font-[family-name:var(--font-display)] text-[10px] tracking-[.42em] uppercase"
-        style={{ color: "rgba(246,241,230,.45)" }}
-      >
-        {t("edgeTL")}
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 1 }}
-        className="absolute bottom-24 right-12 z-[25] font-[family-name:var(--font-display)] text-[10px] tracking-[.42em] uppercase"
-        style={{ color: "rgba(246,241,230,.45)" }}
-      >
-        {t("edgeBR")}
-      </motion.div>
-
       {/* ── MOBILE hero (single card + category tabs) ── */}
       <div className="md:hidden absolute inset-0 z-10 flex flex-col items-center justify-center gap-7 px-6">
         <motion.div
