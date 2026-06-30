@@ -1,23 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Check, ChevronDown, ChevronUp } from "lucide-react";
-import { products } from "@/lib/admin-data";
+import { useProducts } from "@/context/ProductsContext";
 import { useCart } from "@/context/CartContext";
 import Nav from "@/components/Nav";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const { products } = useProducts();
   const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState("");
   const [added, setAdded] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [sizeError, setSizeError] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
 
   const product = products.find((p) => p.id === id);
+
+  useEffect(() => {
+    setActiveImage(0);
+  }, [id]);
+
   if (!product) return notFound();
 
   const related = products
@@ -35,7 +42,7 @@ export default function ProductPage() {
       name: product.name,
       price: product.price,
       priceFormatted: product.priceFormatted,
-      image: product.image,
+      image: product.images[0],
       size: selectedSize,
     });
     setAdded(true);
@@ -65,15 +72,37 @@ export default function ProductPage() {
 
         {/* Product layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-          {/* Image */}
-          <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: "3/4", background: "#ede7d9" }}>
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover object-top"
-              priority
-            />
+          {/* Image gallery */}
+          <div>
+            <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: "3/4", background: "#ede7d9" }}>
+              <Image
+                src={product.images[activeImage] ?? product.images[0]}
+                alt={product.name}
+                fill
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+            {product.images.length > 1 && (
+              <div className="flex gap-3 mt-4">
+                {product.images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    className="relative rounded-xl overflow-hidden flex-shrink-0"
+                    style={{
+                      width: 72,
+                      height: 90,
+                      background: "#ede7d9",
+                      outline: i === activeImage ? "2px solid #b08a4a" : "2px solid transparent",
+                      outlineOffset: 2,
+                    }}
+                  >
+                    <Image src={img} alt={`${product.name} ${i + 1}`} fill className="object-cover object-top" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Details */}
@@ -209,7 +238,7 @@ export default function ProductPage() {
                     style={{ aspectRatio: "3/4", background: "#ede7d9" }}
                   >
                     <Image
-                      src={p.image}
+                      src={p.images[0]}
                       alt={p.name}
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"

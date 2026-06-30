@@ -5,12 +5,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, SlidersHorizontal } from "lucide-react";
-import { products } from "@/lib/admin-data";
+import { useProducts } from "@/context/ProductsContext";
 import Nav from "@/components/Nav";
 
 const CATEGORIES = ["Tous", "Femmes", "Hommes", "Enfants"];
 
 function BoutiqueContent() {
+  const { products } = useProducts();
   const searchParams = useSearchParams();
   const initialCat = searchParams.get("categorie") || "Tous";
   const [cat, setCat] = useState(initialCat);
@@ -21,7 +22,7 @@ function BoutiqueContent() {
     if (sort === "price-asc") list = list.sort((a, b) => a.price - b.price);
     if (sort === "price-desc") list = list.sort((a, b) => b.price - a.price);
     return list;
-  }, [cat, sort]);
+  }, [cat, sort, products]);
 
   return (
     <div className="min-h-screen" style={{ background: "#f6f1e6" }}>
@@ -120,7 +121,7 @@ function BoutiqueContent() {
                 style={{ aspectRatio: "3/4", background: "#ede7d9" }}
               >
                 <Image
-                  src={product.image}
+                  src={product.images[0]}
                   alt={product.name}
                   fill
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105"

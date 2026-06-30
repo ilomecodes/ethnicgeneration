@@ -3,16 +3,19 @@
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { LangProvider } from "@/context/LangContext";
+import { ProductsProvider } from "@/context/ProductsContext";
 import CartDrawer from "@/components/CartDrawer";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       <LangProvider>
-        <CartProvider>
-          {children}
-          <CartDrawer />
-        </CartProvider>
+        <ProductsProvider>
+          <CartProvider>
+            {children}
+            <CartDrawer />
+          </CartProvider>
+        </ProductsProvider>
       </LangProvider>
     </AuthProvider>
   );
