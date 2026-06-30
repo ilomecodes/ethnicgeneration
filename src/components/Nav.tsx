@@ -10,7 +10,6 @@ import type { Lang } from "@/lib/i18n";
 const LANGS: { code: Lang; label: string }[] = [
   { code: "fr", label: "FR" },
   { code: "en", label: "EN" },
-  { code: "yo", label: "YO" },
 ];
 
 interface NavProps {
