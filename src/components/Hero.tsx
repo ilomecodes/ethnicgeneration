@@ -204,12 +204,8 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
               ref={(el) => {
                 plateRefs.current[i] = el;
               }}
-              initial={{ opacity: 0, scale: 1 }}
-              animate={
-                exitingIdx === i
-                  ? { opacity: 0, scale: 1.35 }
-                  : { opacity: 1, scale: 1 }
-              }
+              initial={{ opacity: 0 }}
+              animate={{ opacity: exitingIdx === i ? 0 : 1 }}
               transition={
                 exitingIdx === i
                   ? { duration: 0.4, ease: [0.2, 0.7, 0.2, 1] }
@@ -233,11 +229,16 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                     ? "brightness(1) saturate(1)"
                     : `brightness(${cfg.brightness}) saturate(${cfg.saturation})`,
                   zIndex: exitingIdx === i ? 10 : isActive ? 5 : cfg.zIndex,
-                  transform: isActive
-                    ? `translate(-50%, -50%) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.activeRot}deg)`
-                    : `translate(${cfg.baseX}px, ${cfg.baseY}px) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.baseRot}deg)`,
-                  transition:
-                    "transform 900ms cubic-bezier(.2,.7,.2,1), box-shadow 600ms cubic-bezier(.4,0,.2,1), filter 600ms cubic-bezier(.4,0,.2,1)",
+                  transform: exitingIdx === i
+                    ? (isActive
+                        ? `translate(-50%, -50%) translate(var(--dx,0px), var(--dy,0px)) scale(1.35) rotate(${cfg.activeRot}deg)`
+                        : `translate(${cfg.baseX}px, ${cfg.baseY}px) translate(var(--dx,0px), var(--dy,0px)) scale(1.35) rotate(${cfg.baseRot}deg)`)
+                    : isActive
+                        ? `translate(-50%, -50%) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.activeRot}deg)`
+                        : `translate(${cfg.baseX}px, ${cfg.baseY}px) translate(var(--dx,0px), var(--dy,0px)) rotate(${cfg.baseRot}deg)`,
+                  transition: exitingIdx === i
+                    ? "transform 400ms cubic-bezier(.2,.7,.2,1), box-shadow 400ms, filter 400ms"
+                    : "transform 900ms cubic-bezier(.2,.7,.2,1), box-shadow 600ms cubic-bezier(.4,0,.2,1), filter 600ms cubic-bezier(.4,0,.2,1)",
                   willChange: "transform",
                   "--dx": "0px",
                   "--dy": "0px",
