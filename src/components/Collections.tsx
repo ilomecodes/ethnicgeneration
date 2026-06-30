@@ -6,20 +6,22 @@ import { ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 
 const CARDS = [
-  { eyebrowKey: "col1Kicker", nameKey: "col1Name", image: "/product-1.png" },
-  { eyebrowKey: "col2Kicker", nameKey: "col2Name", image: "/product-2.png" },
-  { eyebrowKey: "col3Kicker", nameKey: "col3Name", image: "/product-3.png" },
+  { eyebrowKey: "col1Kicker", nameKey: "col1Name", image: "/product-1.png", href: "/boutique?categorie=Femmes" },
+  { eyebrowKey: "col2Kicker", nameKey: "col2Name", image: "/product-2.png", href: "/boutique?categorie=Hommes" },
+  { eyebrowKey: "col3Kicker", nameKey: "col3Name", image: "/product-3.png", href: "/boutique?categorie=Enfants" },
 ];
 
 function CollectionCard({
   eyebrowKey,
   nameKey,
   image,
+  href,
   delay,
 }: {
   eyebrowKey: string;
   nameKey: string;
   image: string;
+  href: string;
   delay: number;
 }) {
   const { t } = useLang();
@@ -35,7 +37,7 @@ function CollectionCard({
       className="flex flex-col gap-8"
     >
       <a
-        href="#"
+        href={href}
         className="block relative overflow-hidden"
         style={{ aspectRatio: "3/4", background: "#ede7d9" }}
       >
@@ -67,7 +69,7 @@ function CollectionCard({
           {t(nameKey)}
         </h3>
         <a
-          href="#"
+          href={href}
           className="font-[family-name:var(--font-nav)] font-semibold text-[11px] tracking-[.32em] uppercase no-underline inline-flex items-center gap-2 mt-1.5 pb-1"
           style={{
             color: "#14110d",

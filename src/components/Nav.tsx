@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ShoppingBag, User, ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 interface NavProps {
   scrolledPast: boolean;
@@ -13,6 +14,7 @@ interface NavProps {
 export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
   const { t } = useLang();
   const { user } = useAuth();
+  const { openCart, itemCount } = useCart();
 
   const cream = "rgba(246,241,230,0.78)";
   const ink = "#14110d";
@@ -51,7 +53,7 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
           {t("navAtelier")}
         </a>
         <a
-          href="#"
+          href="/boutique"
           className="no-underline"
           style={{ color: linkColor, transition: "color .25s" }}
           onMouseEnter={(e) => ((e.target as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
@@ -108,16 +110,26 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
             <span className="hidden lg:inline">{t("navAccount")}</span>
           </a>
         )}
-        <a
-          href="#"
-          className="no-underline hidden sm:flex items-center gap-1"
-          style={{ color: linkColor, transition: "color .25s" }}
+        <button
+          onClick={openCart}
+          className="hidden sm:flex items-center gap-1.5 bg-transparent border-0 cursor-pointer relative"
+          style={{ color: linkColor, transition: "color .25s", fontFamily: "var(--font-nav)", fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".18em" }}
           onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
           onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = linkColor)}
         >
-          <ShoppingBag size={13} strokeWidth={1.8} />
-          <span className="hidden lg:inline">{t("navBag")}</span>
-        </a>
+          <span className="relative">
+            <ShoppingBag size={13} strokeWidth={1.8} />
+            {itemCount > 0 && (
+              <span
+                className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full text-[9px] font-bold flex items-center justify-center"
+                style={{ background: "#b08a4a", color: "#fff" }}
+              >
+                {itemCount}
+              </span>
+            )}
+          </span>
+          <span className="hidden lg:inline">{itemCount > 0 ? `Panier (${itemCount})` : t("navBag")}</span>
+        </button>
         <a
           href="/sur-mesure"
           className="flex items-center gap-3 no-underline"

@@ -1,3 +1,127 @@
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  priceFormatted: string;
+  category: "Femmes" | "Hommes" | "Enfants";
+  subcategory: string;
+  image: string;
+  sizes: string[];
+  description: string;
+  details: string[];
+  inStock: boolean;
+  sales: number;
+  featured: boolean;
+}
+
+export const products: Product[] = [
+  {
+    id: "robe-patchwork-wax",
+    name: "Robe Patchwork Wax",
+    price: 59000,
+    priceFormatted: "59 000 FCFA",
+    category: "Femmes",
+    subcategory: "Robes",
+    image: "/product-1.png",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Une robe longue en wax patchwork, mêlant plusieurs motifs traditionnels africains dans une silhouette structurée et moderne. Coupe droite, encolure ronde, manches courtes.",
+    details: ["100% coton wax authentique", "Doublure légère incluse", "Lavage à 30°C à l'envers", "Fabriqué en atelier à Lagos"],
+    inStock: true,
+    sales: 184,
+    featured: true,
+  },
+  {
+    id: "boubou-violet-zigzag",
+    name: "Boubou Violet Zigzag",
+    price: 85000,
+    priceFormatted: "85 000 FCFA",
+    category: "Hommes",
+    subcategory: "Boubous",
+    image: "/product-2.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    description: "Boubou traditionnel en tissu violet à motifs zigzag, idéal pour les cérémonies et occasions festives. Coupe ample et majestueuse, broderies dorées sur l'encolure.",
+    details: ["Tissu jacquard wax 100% coton", "Broderies dorées faites main", "Lavage délicat à 30°C", "Fabriqué en atelier à Dakar"],
+    inStock: true,
+    sales: 142,
+    featured: true,
+  },
+  {
+    id: "robe-kente-courte",
+    name: "Robe Kente Courte",
+    price: 48000,
+    priceFormatted: "48 000 FCFA",
+    category: "Femmes",
+    subcategory: "Robes",
+    image: "/product-3.png",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Robe courte en tissu kente authentique tissé à la main. Parfaite pour les sorties décontractées comme les événements formels. Silhouette évasée, col bateau.",
+    details: ["Tissu kente tissé main", "Doublure coton", "Nettoyage à sec recommandé", "Fabriqué en atelier à Accra"],
+    inStock: true,
+    sales: 97,
+    featured: false,
+  },
+  {
+    id: "haut-cercles-oranges",
+    name: "Haut Cercles Oranges",
+    price: 38000,
+    priceFormatted: "38 000 FCFA",
+    category: "Femmes",
+    subcategory: "Hauts",
+    image: "/product-4.png",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Haut fluide en wax à motifs de cercles oranges et noirs, esprit seventies revisité. Col V, manches courtes légèrement évasées.",
+    details: ["Wax 100% coton", "Coupe fluide et légère", "Lavage à 30°C", "Fabriqué en atelier à Abidjan"],
+    inStock: true,
+    sales: 76,
+    featured: true,
+  },
+  {
+    id: "ensemble-enfant-wax",
+    name: "Ensemble Enfant Wax",
+    price: 33000,
+    priceFormatted: "33 000 FCFA",
+    category: "Enfants",
+    subcategory: "Ensembles",
+    image: "/product-3.png",
+    sizes: ["2 ans", "4 ans", "6 ans", "8 ans", "10 ans", "12 ans"],
+    description: "Ensemble deux pièces pour enfant en wax coloré. Haut à encolure ronde et pantalon large assortis, parfait pour les cérémonies familiales.",
+    details: ["Wax 100% coton doux", "Lavage à 30°C", "Sans produits chimiques irritants", "Fabriqué en atelier à Lagos"],
+    inStock: true,
+    sales: 65,
+    featured: false,
+  },
+  {
+    id: "kaba-africain-brode",
+    name: "Kaba Africain Brodé",
+    price: 72000,
+    priceFormatted: "72 000 FCFA",
+    category: "Femmes",
+    subcategory: "Robes",
+    image: "/product-1.png",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description: "Robe Kaba longue avec broderies artisanales sur l'encolure et les manches. Tissu wax premium, doublure soie, coupe près du corps avec fente latérale.",
+    details: ["Wax premium 100% coton", "Broderies faites main", "Doublure soie incluse", "Fabriqué en atelier à Kumasi"],
+    inStock: true,
+    sales: 54,
+    featured: false,
+  },
+  {
+    id: "chemise-wax-homme",
+    name: "Chemise Wax Homme",
+    price: 42000,
+    priceFormatted: "42 000 FCFA",
+    category: "Hommes",
+    subcategory: "Chemises",
+    image: "/product-4.png",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    description: "Chemise cintrée en wax à imprimé géométrique. Col classique, manches longues avec revers assortis. Une pièce qui allie tradition africaine et coupe contemporaine.",
+    details: ["Wax 100% coton", "Col classique avec boutonnage nacré", "Lavage à 30°C", "Fabriqué en atelier à Lagos"],
+    inStock: true,
+    sales: 53,
+    featured: false,
+  },
+];
+
 export const stats = {
   sales: { value: "8 455 000 FCFA", change: "+550 000", positive: true },
   deliveries: { value: "1 243", change: "+38", positive: true },

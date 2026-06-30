@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLang } from "@/context/LangContext";
 
@@ -12,6 +13,7 @@ interface HeroProps {
 const PLATE_CONFIG = [
   {
     id: "women",
+    href: "/boutique?categorie=Femmes",
     catKey: "catWomen",
     piecesKey: "piecesWomen",
     wordKey: "wordWomen",
@@ -36,6 +38,7 @@ const PLATE_CONFIG = [
   },
   {
     id: "kids",
+    href: "/boutique?categorie=Enfants",
     catKey: "catKids",
     piecesKey: "piecesKids",
     wordKey: "wordKids",
@@ -59,6 +62,7 @@ const PLATE_CONFIG = [
   },
   {
     id: "men",
+    href: "/boutique?categorie=Hommes",
     catKey: "catMen",
     piecesKey: "piecesMen",
     wordKey: "wordMen",
@@ -84,6 +88,7 @@ const PLATE_CONFIG = [
 
 export default function Hero({ onOpenDrawer }: HeroProps) {
   const { t } = useLang();
+  const router = useRouter();
   const [activeIdx, setActiveIdx] = useState(1);
   const [warming, setWarming] = useState(false);
   const warmingTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -208,16 +213,9 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                 if (!el) return;
                 el.style.transition =
                   "transform 600ms cubic-bezier(.2,.7,.2,1), opacity .6s";
-                el.style.transform =
-                  "translate(-50%,-50%) scale(1.4)";
+                el.style.transform = "translate(-50%,-50%) scale(1.4)";
                 el.style.opacity = "0";
-                setTimeout(() => {
-                  if (el) {
-                    el.style.transition = "";
-                    el.style.transform = "";
-                    el.style.opacity = "";
-                  }
-                }, 900);
+                setTimeout(() => router.push(cfg.href), 500);
               }}
               className="absolute top-1/2 left-1/2 overflow-hidden cursor-pointer"
               style={
@@ -395,7 +393,7 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
           {t(activeData.labelKey)}
         </div>
         <button
-          onClick={onOpenDrawer}
+          onClick={() => router.push("/boutique")}
           className="mt-8 inline-flex items-center gap-3.5 font-[family-name:var(--font-display)] text-[12px] tracking-[.32em] uppercase cursor-pointer bg-transparent border-0 pb-1"
           style={{
             color: "#f6f1e6",

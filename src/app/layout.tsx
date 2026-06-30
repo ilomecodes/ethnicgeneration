@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Archivo, Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/context/AuthContext";
+import Providers from "@/components/Providers";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${cormorant.variable} ${archivo.variable} ${inter.variable}`}>
       <body className="min-h-screen overflow-x-hidden font-[family-name:var(--font-ui)]">
-        <AuthProvider>{children}</AuthProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
