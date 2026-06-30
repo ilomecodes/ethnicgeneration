@@ -20,7 +20,7 @@ const PLATE_CONFIG = [
     descKey: "descWomen",
     labelKey: "labelWomen",
     pieces: 24,
-    src: "/women wax.jpg",
+    src: "/hero-women.png",
     // base transform (from left:50%, top:50%)
     baseX: -260,
     baseY: -230, // -50% of 460px
@@ -45,7 +45,7 @@ const PLATE_CONFIG = [
     descKey: "descKids",
     labelKey: "labelKids",
     pieces: 18,
-    src: "/kid wax.jpg",
+    src: "/hero-kid.png",
     baseX: -180, // -50% of 360px
     baseY: -260, // -50% of 520px
     baseRot: 0,
@@ -69,7 +69,7 @@ const PLATE_CONFIG = [
     descKey: "descMen",
     labelKey: "labelMen",
     pieces: 21,
-    src: "/men wax.jpg",
+    src: "/hero-men.png",
     baseX: 220,
     baseY: -230, // -50% of 460px
     baseRot: 6,
@@ -260,7 +260,7 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
                 src={cfg.src}
                 alt={t(cfg.catKey)}
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 360px"
                 priority={i === 1}
               />
