@@ -20,7 +20,7 @@ const PLATE_CONFIG = [
     descKey: "descWomen",
     labelKey: "labelWomen",
     pieces: 24,
-    src: "/plate-women.png",
+    src: "/women wax.jpg",
     // base transform (from left:50%, top:50%)
     baseX: -260,
     baseY: -230, // -50% of 460px
@@ -45,7 +45,7 @@ const PLATE_CONFIG = [
     descKey: "descKids",
     labelKey: "labelKids",
     pieces: 18,
-    src: "/plate-kids.png",
+    src: "/kid wax.jpg",
     baseX: -180, // -50% of 360px
     baseY: -260, // -50% of 520px
     baseRot: 0,
@@ -69,7 +69,7 @@ const PLATE_CONFIG = [
     descKey: "descMen",
     labelKey: "labelMen",
     pieces: 21,
-    src: "/plate-men.png",
+    src: "/men wax.jpg",
     baseX: 220,
     baseY: -230, // -50% of 460px
     baseRot: 6,
