@@ -175,7 +175,7 @@ export default function Footer() {
       <div
         aria-hidden="true"
         className="absolute bottom-[-18px] left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap leading-none font-[family-name:var(--font-display)] italic font-light"
-        style={{ fontSize: 220, letterSpacing: "-.02em", color: "rgba(246,241,230,.05)" }}
+        style={{ fontSize: "clamp(60px, 15vw, 220px)", letterSpacing: "-.02em", color: "rgba(246,241,230,.05)" }}
       >
         Ethnicgeneration
       </div>
