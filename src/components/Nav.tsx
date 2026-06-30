@@ -5,6 +5,13 @@ import { ShoppingBag, User, ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import type { Lang } from "@/lib/i18n";
+
+const LANGS: { code: Lang; label: string }[] = [
+  { code: "fr", label: "FR" },
+  { code: "en", label: "EN" },
+  { code: "yo", label: "YO" },
+];
 
 interface NavProps {
   scrolledPast: boolean;
@@ -12,7 +19,7 @@ interface NavProps {
 }
 
 export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
-  const { t } = useLang();
+  const { t, lang, setLang } = useLang();
   const { user } = useAuth();
   const { openCart, itemCount } = useCart();
 
@@ -82,6 +89,37 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
         className="justify-self-end flex items-center gap-8 font-[family-name:var(--font-nav)] font-semibold text-[11px] uppercase tracking-[.18em]"
         style={{ color: linkColor, transition: "color .4s" }}
       >
+        {/* Language switcher */}
+        <div className="hidden md:flex items-center gap-0.5 mr-1">
+          {LANGS.map((l, i) => (
+            <span key={l.code} className="flex items-center">
+              {i > 0 && (
+                <span style={{ color: linkColor, opacity: 0.25, margin: "0 3px", fontSize: 9 }}>
+                  ·
+                </span>
+              )}
+              <button
+                onClick={() => setLang(l.code)}
+                className="bg-transparent border-0 cursor-pointer px-0.5 py-1"
+                style={{
+                  fontFamily: "var(--font-nav)",
+                  fontSize: "9px",
+                  fontWeight: lang === l.code ? 700 : 400,
+                  letterSpacing: ".22em",
+                  textTransform: "uppercase",
+                  color: lang === l.code ? (scrolledPast ? "#b08a4a" : "#d9b89a") : linkColor,
+                  transition: "color .25s",
+                  textDecoration: lang === l.code ? "underline" : "none",
+                  textDecorationColor: "#b08a4a",
+                  textUnderlineOffset: "3px",
+                }}
+              >
+                {l.label}
+              </button>
+            </span>
+          ))}
+        </div>
+
         {user ? (
           <a
             href="/compte"

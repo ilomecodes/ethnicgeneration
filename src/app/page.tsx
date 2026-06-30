@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LangProvider } from "@/context/LangContext";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Collections from "@/components/Collections";
 import Banner from "@/components/Banner";
 import Drawer from "@/components/Drawer";
 import Footer from "@/components/Footer";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function HomePage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -31,7 +29,6 @@ function HomePage() {
   return (
     <>
       <Nav scrolledPast={scrolledPast} onOpenDrawer={openDrawer} />
-      <LanguageSwitcher />
       <div ref={heroRef}>
         <Hero onOpenDrawer={openDrawer} />
       </div>
@@ -44,9 +41,5 @@ function HomePage() {
 }
 
 export default function Page() {
-  return (
-    <LangProvider>
-      <HomePage />
-    </LangProvider>
-  );
+  return <HomePage />;
 }

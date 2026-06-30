@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Camera, Globe, Play, Music2 } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 
 const COL_A = ["fa1", "fa2", "fa3", "fa4", "fa5"];
@@ -34,6 +33,146 @@ function FootLink({ href, text }: { href: string; text: string }) {
   );
 }
 
+/* ── Social SVG icons ── */
+function IconFacebook() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-label="Facebook">
+      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+    </svg>
+  );
+}
+
+function IconInstagram() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-label="Instagram">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
+/* ── Payment SVG icons ── */
+function IconVisa() {
+  return (
+    <div
+      className="flex items-center justify-center rounded"
+      style={{ background: "white", padding: "5px 9px", height: 32 }}
+    >
+      <svg viewBox="0 0 60 20" width="42" height="14" aria-label="Visa">
+        {/* VISA wordmark in navy blue */}
+        <text
+          x="0" y="16"
+          fontFamily="Arial, Helvetica, sans-serif"
+          fontWeight="800"
+          fontStyle="italic"
+          fontSize="18"
+          fill="#1A1F71"
+          letterSpacing="-0.5"
+        >
+          VISA
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function IconMastercard() {
+  return (
+    <div
+      className="flex items-center justify-center rounded gap-1"
+      style={{ background: "white", padding: "5px 9px", height: 32 }}
+    >
+      <svg viewBox="0 0 50 32" width="44" height="28" aria-label="Mastercard">
+        <circle cx="19" cy="16" r="12" fill="#EB001B" />
+        <circle cx="31" cy="16" r="12" fill="#F79E1B" />
+        {/* Overlap blend — simplified orange vesica */}
+        <path
+          d="M25 6.27C27.47 8.22 29.1 11.3 29.1 14.8s-1.63 6.58-4.1 8.53C22.53 21.38 20.9 18.3 20.9 14.8s1.63-6.58 4.1-8.53z"
+          fill="#FF5F00"
+        />
+        {/* MC text */}
+        <text x="6" y="29" fontFamily="Arial" fontWeight="700" fontSize="7" fill="#222" letterSpacing="0.5">mc</text>
+      </svg>
+    </div>
+  );
+}
+
+function IconMTNMomo() {
+  return (
+    <div
+      className="flex items-center justify-center rounded gap-1.5"
+      style={{ background: "#FFC107", padding: "5px 9px", height: 32 }}
+    >
+      {/* MTN logo: yellow circle with stylized M waves */}
+      <svg viewBox="0 0 44 20" width="44" height="20" aria-label="MTN Mobile Money">
+        {/* Waves / signal arcs */}
+        <path d="M4 10 Q7 4 10 10 Q13 16 16 10" fill="none" stroke="#1A1A1A" strokeWidth="2.2" strokeLinecap="round"/>
+        {/* MTN text */}
+        <text x="18" y="15" fontFamily="Arial" fontWeight="900" fontSize="12" fill="#1A1A1A" letterSpacing="0.3">MTN</text>
+      </svg>
+    </div>
+  );
+}
+
+function IconOrangeMoney() {
+  return (
+    <div
+      className="flex items-center justify-center rounded gap-1.5"
+      style={{ background: "#FF7900", padding: "5px 9px", height: 32 }}
+    >
+      <svg viewBox="0 0 52 20" width="52" height="20" aria-label="Orange Money">
+        {/* Orange circle emblem */}
+        <circle cx="10" cy="10" r="8" fill="white" opacity="0.25" />
+        <circle cx="10" cy="10" r="5" fill="white" />
+        {/* Text */}
+        <text x="21" y="15" fontFamily="Arial" fontWeight="800" fontSize="11.5" fill="white" letterSpacing="0">Orange</text>
+      </svg>
+    </div>
+  );
+}
+
+function IconWave() {
+  return (
+    <div
+      className="flex items-center justify-center rounded gap-1.5"
+      style={{ background: "#12B0E8", padding: "5px 9px", height: 32 }}
+    >
+      <svg viewBox="0 0 48 20" width="48" height="20" aria-label="Wave Mobile Money">
+        {/* Wave tilde shape */}
+        <path
+          d="M3 13 Q7 5 11 11 Q15 17 19 9"
+          fill="none"
+          stroke="white"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        {/* Wave text */}
+        <text x="22" y="15" fontFamily="Arial" fontWeight="700" fontSize="12" fill="white" letterSpacing="0">Wave</text>
+      </svg>
+    </div>
+  );
+}
+
+const SOCIALS = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/ethnicgeneration",
+    icon: <IconFacebook />,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/ethnicgeneration",
+    icon: <IconInstagram />,
+  },
+];
+
+const PAYMENTS = [
+  { label: "Visa", icon: <IconVisa /> },
+  { label: "Mastercard", icon: <IconMastercard /> },
+  { label: "MTN MoMo", icon: <IconMTNMomo /> },
+  { label: "Orange Money", icon: <IconOrangeMoney /> },
+  { label: "Wave", icon: <IconWave /> },
+];
+
 export default function Footer() {
   const { t } = useLang();
   const ref = useRef(null);
@@ -64,7 +203,7 @@ export default function Footer() {
         Ethnicgeneration
       </div>
 
-      {/* Grid */}
+      {/* Nav grid */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 24 }}
@@ -100,8 +239,37 @@ export default function Footer() {
         style={{ height: 1, background: "rgba(246,241,230,.15)" }}
       />
 
+      {/* Payment methods */}
+      <div className="max-w-[1280px] mx-auto mb-8 relative flex flex-col items-center gap-3">
+        <p
+          className="text-[10px] tracking-[.38em] uppercase"
+          style={{ color: "rgba(246,241,230,.4)", fontFamily: "var(--font-nav)" }}
+        >
+          Moyens de paiement acceptés
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
+          {PAYMENTS.map(({ label, icon }) => (
+            <div
+              key={label}
+              title={label}
+              className="flex items-center justify-center rounded-lg shadow-sm overflow-hidden"
+              style={{ boxShadow: "0 1px 4px rgba(0,0,0,.18)" }}
+            >
+              {icon}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Rule */}
+      <div
+        className="max-w-[1280px] mx-auto mb-8 relative"
+        style={{ height: 1, background: "rgba(246,241,230,.08)" }}
+      />
+
       {/* Bottom row */}
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 relative">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 relative">
+        {/* Brand */}
         <div
           className="font-[family-name:var(--font-display)] italic text-[13px] tracking-[.04em]"
           style={{ color: "rgba(246,241,230,.85)" }}
@@ -114,37 +282,41 @@ export default function Footer() {
             EST · 2024 · LAGOS / PARIS
           </span>
         </div>
-        <div
-          className="justify-self-center flex items-center gap-4 font-[family-name:var(--font-display)] text-[12px] tracking-[.26em] uppercase"
-        >
-          {[
-            { label: "Instagram", icon: <Camera size={14} strokeWidth={1.5} /> },
-            { label: "Pinterest", icon: <Globe size={14} strokeWidth={1.5} /> },
-            { label: "YouTube", icon: <Play size={14} strokeWidth={1.5} /> },
-            { label: "Spotify", icon: <Music2 size={14} strokeWidth={1.5} /> },
-          ].map(({ label, icon }, i) => (
-            <span key={label} className="flex items-center gap-3">
-              {i > 0 && (
-                <span
-                  className="w-1 h-1 rounded-full"
-                  style={{ background: "rgba(246,241,230,.3)" }}
-                />
-              )}
-              <a
-                href="#"
-                className="no-underline flex items-center gap-1.5"
-                style={linkStyle}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#f6f1e6")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(246,241,230,.7)")}
-              >
-                {icon}
-                <span className="hidden lg:inline">{label}</span>
-              </a>
-            </span>
+
+        {/* Social icons — only Facebook & Instagram */}
+        <div className="justify-self-center flex items-center gap-5">
+          {SOCIALS.map(({ label, href, icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="flex items-center justify-center w-10 h-10 rounded-full transition-all"
+              style={{
+                color: "rgba(246,241,230,.7)",
+                background: "rgba(246,241,230,.08)",
+                transition: "background .25s, color .25s",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "rgba(176,138,74,.3)";
+                el.style.color = "#f6f1e6";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "rgba(246,241,230,.08)";
+                el.style.color = "rgba(246,241,230,.7)";
+              }}
+            >
+              {icon}
+            </a>
           ))}
         </div>
+
+        {/* Copyright */}
         <div
-          className="justify-self-end font-[family-name:var(--font-display)] italic text-[12px] tracking-[.04em]"
+          className="justify-self-end font-[family-name:var(--font-display)] italic text-[12px] tracking-[.04em] text-right"
           style={{ color: "rgba(246,241,230,.5)" }}
         >
           {t("footCopy")}
