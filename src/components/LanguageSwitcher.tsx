@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useLang } from "@/context/LangContext";
 import type { Lang } from "@/lib/i18n";
 
-const LANGS: Lang[] = ["fr", "en", "yo"];
+const LANGS: Lang[] = ["fr", "en"];
 
 export default function LanguageSwitcher() {
   const { lang, setLang } = useLang();
