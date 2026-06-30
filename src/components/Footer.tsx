@@ -99,16 +99,15 @@ function IconMastercard() {
 function IconMTNMomo() {
   return (
     <div
-      className="flex items-center justify-center rounded gap-1.5"
-      style={{ background: "#FFC107", padding: "5px 9px", height: 32 }}
+      className="flex items-center justify-center rounded gap-1"
+      style={{ background: "#FFC107", padding: "5px 10px", height: 32 }}
     >
-      {/* MTN logo: yellow circle with stylized M waves */}
-      <svg viewBox="0 0 44 20" width="44" height="20" aria-label="MTN Mobile Money">
-        {/* Waves / signal arcs */}
-        <path d="M4 10 Q7 4 10 10 Q13 16 16 10" fill="none" stroke="#1A1A1A" strokeWidth="2.2" strokeLinecap="round"/>
-        {/* MTN text */}
-        <text x="18" y="15" fontFamily="Arial" fontWeight="900" fontSize="12" fill="#1A1A1A" letterSpacing="0.3">MTN</text>
+      <svg viewBox="0 0 14 12" width="14" height="12" aria-hidden="true">
+        <path d="M1 9 Q4 2 7 7 Q10 12 13 5" fill="none" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
       </svg>
+      <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 900, fontSize: 12, color: "#1A1A1A", letterSpacing: "0.5px" }}>
+        MTN
+      </span>
     </div>
   );
 }
@@ -116,16 +115,16 @@ function IconMTNMomo() {
 function IconOrangeMoney() {
   return (
     <div
-      className="flex items-center justify-center rounded gap-1.5"
-      style={{ background: "#FF7900", padding: "5px 9px", height: 32 }}
+      className="flex items-center justify-center rounded gap-1"
+      style={{ background: "#FF7900", padding: "5px 10px", height: 32 }}
     >
-      <svg viewBox="0 0 52 20" width="52" height="20" aria-label="Orange Money">
-        {/* Orange circle emblem */}
-        <circle cx="10" cy="10" r="8" fill="white" opacity="0.25" />
-        <circle cx="10" cy="10" r="5" fill="white" />
-        {/* Text */}
-        <text x="21" y="15" fontFamily="Arial" fontWeight="800" fontSize="11.5" fill="white" letterSpacing="0">Orange</text>
-      </svg>
+      <div
+        className="rounded-full flex-shrink-0"
+        style={{ width: 10, height: 10, background: "rgba(255,255,255,0.5)", border: "2px solid white" }}
+      />
+      <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 800, fontSize: 12, color: "white" }}>
+        Orange
+      </span>
     </div>
   );
 }
@@ -133,21 +132,15 @@ function IconOrangeMoney() {
 function IconWave() {
   return (
     <div
-      className="flex items-center justify-center rounded gap-1.5"
-      style={{ background: "#12B0E8", padding: "5px 9px", height: 32 }}
+      className="flex items-center justify-center rounded gap-1"
+      style={{ background: "#12B0E8", padding: "5px 10px", height: 32 }}
     >
-      <svg viewBox="0 0 48 20" width="48" height="20" aria-label="Wave Mobile Money">
-        {/* Wave tilde shape */}
-        <path
-          d="M3 13 Q7 5 11 11 Q15 17 19 9"
-          fill="none"
-          stroke="white"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        {/* Wave text */}
-        <text x="22" y="15" fontFamily="Arial" fontWeight="700" fontSize="12" fill="white" letterSpacing="0">Wave</text>
+      <svg viewBox="0 0 16 12" width="16" height="12" aria-hidden="true">
+        <path d="M1 9 Q5 2 8 7 Q11 12 15 4" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
+      <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 700, fontSize: 12, color: "white" }}>
+        Wave
+      </span>
     </div>
   );
 }
@@ -279,7 +272,7 @@ export default function Footer() {
             className="block not-italic text-[9px] tracking-[.42em] mt-1"
             style={{ color: "#d9b89a" }}
           >
-            EST · 2024 · LAGOS / PARIS
+            YAOUNDÉ, CAMEROON
           </span>
         </div>
 

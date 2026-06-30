@@ -76,12 +76,6 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
         style={{ color: brandColor, transition: "color .4s" }}
       >
         Ethnicgeneration
-        <span
-          className="block font-[family-name:var(--font-nav)] not-italic font-bold text-[9px] tracking-[.38em] mt-1"
-          style={{ color: markColor, transition: "color .4s" }}
-        >
-          EST · 2024
-        </span>
       </div>
 
       {/* Right links */}
