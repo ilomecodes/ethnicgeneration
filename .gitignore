@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# session artifacts
+/assets/
+/chats/
+/project/
+/image-slot.js
+/screenshot.cjs
+/index.html
