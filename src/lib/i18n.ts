@@ -90,7 +90,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     fd3: "Cookies",
     fd4: "Mentions légales",
     fd5: "Accessibilité",
-    footCopy: "© 2026 Ethnic Generation. Tous droits réservés.",
+    footCopy: "© 2026 Ethnicgeneration. Tous droits réservés.",
   },
   en: {
     navAtelier: "Atelier",
@@ -181,7 +181,7 @@ export const I18N: Record<Lang, Record<string, string>> = {
     fd3: "Cookies",
     fd4: "Legal notices",
     fd5: "Accessibility",
-    footCopy: "© 2026 Ethnic Generation. All rights reserved.",
+    footCopy: "© 2026 Ethnicgeneration. All rights reserved.",
   },
   yo: {
     navAtelier: "Iléṣẹ́",
@@ -272,6 +272,6 @@ export const I18N: Record<Lang, Record<string, string>> = {
     fd3: "Cookies",
     fd4: "Ìkéde òfin",
     fd5: "Ìráyé",
-    footCopy: "© 2026 Ethnic Generation. Gbogbo ẹ̀tọ́ ni ẹ̀tọ́.",
+    footCopy: "© 2026 Ethnicgeneration. Gbogbo ẹ̀tọ́ ni ẹ̀tọ́.",
   },
 };

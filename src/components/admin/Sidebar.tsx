@@ -69,7 +69,7 @@ export default function AdminSidebar() {
           EG
         </div>
         <span className="text-white font-semibold text-sm tracking-wide">
-          Ethnic Generation
+          Ethnicgeneration
         </span>
       </div>
 

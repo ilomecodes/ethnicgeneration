@@ -61,7 +61,7 @@ export default function Footer() {
         className="absolute bottom-[-18px] left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap leading-none font-[family-name:var(--font-display)] italic font-light"
         style={{ fontSize: 220, letterSpacing: "-.02em", color: "rgba(246,241,230,.05)" }}
       >
-        Ethnic Generation
+        Ethnicgeneration
       </div>
 
       {/* Grid */}
@@ -106,7 +106,7 @@ export default function Footer() {
           className="font-[family-name:var(--font-display)] italic text-[13px] tracking-[.04em]"
           style={{ color: "rgba(246,241,230,.85)" }}
         >
-          <span className="block text-[22px] italic">Ethnic Generation</span>
+          <span className="block text-[22px] italic">Ethnicgeneration</span>
           <span
             className="block not-italic text-[9px] tracking-[.42em] mt-1"
             style={{ color: "#d9b89a" }}

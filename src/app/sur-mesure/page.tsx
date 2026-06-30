@@ -167,7 +167,7 @@ export default function SurMesurePage() {
         </Link>
         <div className="text-center">
           <span className="font-[family-name:var(--font-display)] italic text-xl" style={{ color: "#14110d" }}>
-            Ethnic Generation
+            Ethnicgeneration
           </span>
           <span className="block font-[family-name:var(--font-nav)] text-[9px] tracking-[.38em] uppercase mt-0.5" style={{ color: "#b08a4a" }}>
             Atelier Sur Mesure

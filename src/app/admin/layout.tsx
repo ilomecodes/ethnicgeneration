@@ -1,7 +1,7 @@
 import AdminSidebar from "@/components/admin/Sidebar";
 import AdminHeader from "@/components/admin/Header";
 
-export const metadata = { title: "Admin — Ethnic Generation" };
+export const metadata = { title: "Admin — Ethnicgeneration" };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (

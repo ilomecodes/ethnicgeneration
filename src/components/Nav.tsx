@@ -64,7 +64,7 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
         className="justify-self-center text-center font-[family-name:var(--font-display)] italic font-medium text-[26px] tracking-[.04em] leading-none"
         style={{ color: brandColor, transition: "color .4s" }}
       >
-        Ethnic Generation
+        Ethnicgeneration
         <span
           className="block font-[family-name:var(--font-nav)] not-italic font-bold text-[9px] tracking-[.38em] mt-1"
           style={{ color: markColor, transition: "color .4s" }}

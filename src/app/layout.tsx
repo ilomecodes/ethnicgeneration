@@ -25,9 +25,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ethnic Generation — Artisanat Africain, Silhouette Globale",
+  title: "Ethnicgeneration — Artisanat Africain, Silhouette Globale",
   description:
-    "Ethnic Generation — collections Femmes, Hommes, Enfants. Atelier sur mesure. Lagos / Paris.",
+    "Ethnicgeneration — collections Femmes, Hommes, Enfants. Atelier sur mesure. Lagos / Paris.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
