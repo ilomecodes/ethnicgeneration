@@ -193,8 +193,84 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
         {t("edgeBR")}
       </motion.div>
 
-      {/* Plates */}
-      <div className="absolute inset-0 z-10" style={{ perspective: 1400 }}>
+      {/* ── MOBILE hero (single card + category tabs) ── */}
+      <div className="md:hidden absolute inset-0 z-10 flex flex-col items-center justify-center gap-7 px-6">
+        <motion.div
+          key={activeIdx}
+          initial={{ opacity: 0, scale: 0.93 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.45, ease: [0.2, 0.7, 0.2, 1] }}
+          className="relative overflow-hidden rounded-2xl cursor-pointer"
+          style={{
+            width: "min(72vw, 260px)",
+            aspectRatio: `${PLATE_CONFIG[activeIdx].width}/${PLATE_CONFIG[activeIdx].height}`,
+            background: "#2a1812",
+            boxShadow: "0 40px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(246,241,230,.15)",
+          }}
+          onClick={() => router.push(activeData.href)}
+        >
+          <div className="absolute inset-0" style={{ background: activeData.gradient }} />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, transparent 0 22px, rgba(246,241,230,.018) 22px 23px), repeating-linear-gradient(-45deg, transparent 0 22px, rgba(246,241,230,.018) 22px 23px)",
+              mixBlendMode: "overlay",
+            }}
+          />
+          <Image
+            src={activeData.src}
+            alt={t(activeData.catKey)}
+            fill
+            className="object-cover"
+            style={{ objectPosition: activeData.objectPosition }}
+            priority
+          />
+          <div
+            className="absolute left-0 right-0 bottom-0 z-[2] px-5 py-4"
+            style={{ background: "linear-gradient(0deg, rgba(20,17,13,.85) 0%, transparent 100%)" }}
+          >
+            <div className="font-[family-name:var(--font-display)] font-light text-2xl tracking-wide" style={{ color: "#f6f1e6" }}>
+              {t(activeData.catKey)}
+            </div>
+            <div className="font-[family-name:var(--font-display)] italic text-xs tracking-wide mt-1" style={{ color: "rgba(246,241,230,.6)" }}>
+              {t(activeData.piecesKey)}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Category tabs */}
+        <div className="flex items-center gap-8 z-20">
+          {PLATE_CONFIG.map((cfg, i) => (
+            <button
+              key={cfg.id}
+              onClick={() => handleSetActive(i)}
+              className="font-[family-name:var(--font-nav)] text-[10px] tracking-[.3em] uppercase font-semibold pb-1.5 bg-transparent"
+              style={{
+                color: i === activeIdx ? "#d9b89a" : "rgba(246,241,230,.4)",
+                border: "none",
+                borderBottom: i === activeIdx ? "1px solid #b08a4a" : "1px solid transparent",
+                transition: "color .3s, border-color .3s",
+                cursor: "pointer",
+              }}
+            >
+              {t(cfg.catKey)}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile CTA */}
+        <button
+          onClick={() => router.push("/boutique")}
+          className="font-[family-name:var(--font-nav)] text-[11px] tracking-[.28em] uppercase font-semibold bg-transparent"
+          style={{ color: "#f6f1e6", border: "none", borderBottom: "1px solid #b08a4a", paddingBottom: "2px", cursor: "pointer" }}
+        >
+          {t("enter")}
+        </button>
+      </div>
+
+      {/* ── DESKTOP plates (three overlapping cards) ── */}
+      <div className="hidden md:block absolute inset-0 z-10" style={{ perspective: 1400 }}>
         {PLATE_CONFIG.map((cfg, i) => {
           const isActive = i === activeIdx;
           const delays = [0.1, 0.28, 0.46];
@@ -306,7 +382,7 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
             </motion.article>
           );
         })}
-      </div>
+      </div>{/* end desktop plates */}
 
       {/* Type stack (left) */}
       <motion.div
