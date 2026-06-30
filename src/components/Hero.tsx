@@ -482,26 +482,10 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
         className="absolute left-0 right-0 bottom-7 text-center z-20 pointer-events-none"
       >
         <div
-          className="font-[family-name:var(--font-display)] italic text-[13px] tracking-[.42em] uppercase"
+          className="font-[family-name:var(--font-display)] italic text-[13px] tracking-[.18em] uppercase px-6"
           style={{ color: "#d9b89a" }}
         >
-          {t("mq1")}
-          <span
-            className="inline-block w-1 h-1 rounded-full mx-4 align-[4px]"
-            style={{ background: "#b08a4a" }}
-          />
-          {t("mq2")}
-          <span
-            className="inline-block w-1 h-1 rounded-full mx-4 align-[4px]"
-            style={{ background: "#b08a4a" }}
-          />
-          {t("mq3")}
-        </div>
-        <div
-          className="mt-2 font-[family-name:var(--font-display)] text-[10px] tracking-[.56em] uppercase"
-          style={{ color: "rgba(246,241,230,.35)" }}
-        >
-          {t("sub")}
+          {t("tagline")}
         </div>
       </motion.div>
     </section>
