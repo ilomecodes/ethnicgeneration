@@ -21,7 +21,6 @@ type PayStep = null | "choose" | "mobile-money" | "success";
 const MOBILE_PROVIDERS = [
   { id: "mtn", label: "MTN MoMo", bg: "#FFC107", color: "#1A1A1A" },
   { id: "orange", label: "Orange Money", bg: "#FF7900", color: "#fff" },
-  { id: "wave", label: "Wave", bg: "#12B0E8", color: "#fff" },
 ];
 
 function genOrderNum() {

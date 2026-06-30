@@ -129,21 +129,6 @@ function IconOrangeMoney() {
   );
 }
 
-function IconWave() {
-  return (
-    <div
-      className="flex items-center justify-center rounded gap-1"
-      style={{ background: "#12B0E8", padding: "5px 10px", height: 32 }}
-    >
-      <svg viewBox="0 0 16 12" width="16" height="12" aria-hidden="true">
-        <path d="M1 9 Q5 2 8 7 Q11 12 15 4" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-      </svg>
-      <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 700, fontSize: 12, color: "white" }}>
-        Wave
-      </span>
-    </div>
-  );
-}
 
 const SOCIALS = [
   {
@@ -163,7 +148,6 @@ const PAYMENTS = [
   { label: "Mastercard", icon: <IconMastercard /> },
   { label: "MTN MoMo", icon: <IconMTNMomo /> },
   { label: "Orange Money", icon: <IconOrangeMoney /> },
-  { label: "Wave", icon: <IconWave /> },
 ];
 
 export default function Footer() {
