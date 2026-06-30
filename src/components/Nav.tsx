@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, User, ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
+import { useAuth } from "@/context/AuthContext";
 
 interface NavProps {
   scrolledPast: boolean;
@@ -11,6 +12,7 @@ interface NavProps {
 
 export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
   const { t } = useLang();
+  const { user } = useAuth();
 
   const cream = "rgba(246,241,230,0.78)";
   const ink = "#14110d";
@@ -78,16 +80,34 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
         className="justify-self-end flex items-center gap-8 font-[family-name:var(--font-nav)] font-semibold text-[11px] uppercase tracking-[.18em]"
         style={{ color: linkColor, transition: "color .4s" }}
       >
-        <a
-          href="#"
-          className="no-underline hidden sm:flex items-center gap-1"
-          style={{ color: linkColor, transition: "color .25s" }}
-          onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
-          onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = linkColor)}
-        >
-          <User size={13} strokeWidth={1.8} />
-          <span className="hidden lg:inline">{t("navAccount")}</span>
-        </a>
+        {user ? (
+          <a
+            href="/compte"
+            className="no-underline hidden sm:flex items-center gap-2"
+            style={{ color: linkColor, transition: "color .25s" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = linkColor)}
+          >
+            <div
+              className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0"
+              style={{ background: "#b08a4a" }}
+            >
+              {user.initials}
+            </div>
+            <span className="hidden lg:inline text-[11px]">{user.name.split(" ")[0]}</span>
+          </a>
+        ) : (
+          <a
+            href="/connexion"
+            className="no-underline hidden sm:flex items-center gap-1"
+            style={{ color: linkColor, transition: "color .25s" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = linkColor)}
+          >
+            <User size={13} strokeWidth={1.8} />
+            <span className="hidden lg:inline">{t("navAccount")}</span>
+          </a>
+        )}
         <a
           href="#"
           className="no-underline hidden sm:flex items-center gap-1"
