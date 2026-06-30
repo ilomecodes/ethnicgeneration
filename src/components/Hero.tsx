@@ -474,16 +474,23 @@ export default function Hero({ onOpenDrawer }: HeroProps) {
         </button>
       </motion.aside>
 
-      {/* Bottom marquee */}
+      {/* Tagline — above images */}
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 1 }}
-        className="absolute left-0 right-0 bottom-7 text-center z-20 pointer-events-none"
+        transition={{ delay: 0.5, duration: 1, ease: [0.2, 0.7, 0.2, 1] }}
+        className="absolute left-0 right-0 z-20 pointer-events-none flex flex-col items-center gap-1"
+        style={{ top: 88 }}
       >
         <div
-          className="font-[family-name:var(--font-display)] italic text-[13px] tracking-[.18em] uppercase px-6"
-          style={{ color: "#d9b89a" }}
+          className="font-[family-name:var(--font-display)] italic text-[11px] tracking-[.42em] uppercase"
+          style={{ color: "rgba(246,241,230,.35)" }}
+        >
+          — Ethnicgeneration
+        </div>
+        <div
+          className="font-[family-name:var(--font-display)] italic text-[22px] md:text-[30px] tracking-[.06em] text-center px-6 leading-snug"
+          style={{ color: "#f6f1e6" }}
         >
           {t("tagline")}
         </div>
