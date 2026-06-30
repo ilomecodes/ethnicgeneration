@@ -165,33 +165,34 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-end justify-between">
+    <div className="space-y-5 md:space-y-6">
+      <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800">Produits</h1>
+          <h1 className="text-xl md:text-2xl font-semibold text-gray-800">Produits</h1>
           <p className="text-sm text-gray-400 mt-0.5">{products.length} produits dans le catalogue</p>
         </div>
         <button
           onClick={openCreate}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white flex-shrink-0"
           style={{ background: "#b08a4a" }}
         >
           <Plus size={16} />
-          Ajouter un produit
+          <span className="hidden sm:inline">Ajouter un produit</span>
+          <span className="sm:hidden">Ajouter</span>
         </button>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl shadow-sm flex-1 max-w-sm">
-          <Search size={15} className="text-gray-400" />
+      <div className="flex flex-wrap items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl shadow-sm flex-1 min-w-[160px] max-w-sm">
+          <Search size={15} className="text-gray-400 flex-shrink-0" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Rechercher un produit..."
-            className="text-sm text-gray-700 placeholder-gray-400 outline-none flex-1 bg-transparent"
+            className="text-sm text-gray-700 placeholder-gray-400 outline-none flex-1 bg-transparent min-w-0"
           />
         </div>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-1.5 flex-wrap">
           {catOptions.map((c) => (
             <button
               key={c}
@@ -209,7 +210,7 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
         {filtered.map((p) => (
           <div key={p.id} className="bg-white rounded-2xl shadow-sm overflow-hidden group">
             <div className="relative h-44 overflow-hidden" style={{ background: "#f0ebe0" }}>

@@ -84,7 +84,7 @@ export default function OptionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold" style={{ color: "#14110d" }}>Options & Modèles</h1>
+        <h1 className="text-xl md:text-2xl font-semibold" style={{ color: "#14110d" }}>Options & Modèles</h1>
         <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>
           Gérez les choix proposés dans le formulaire Sur Mesure côté client.
         </p>

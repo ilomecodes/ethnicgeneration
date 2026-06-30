@@ -112,9 +112,9 @@ const statCards = [
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 md:space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold" style={{ color: "#14110d" }}>
+        <h1 className="text-xl md:text-2xl font-semibold" style={{ color: "#14110d" }}>
           Bonjour, <span style={{ color: "#b08a4a" }}>Admin</span>
         </h1>
         <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>
@@ -123,12 +123,12 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
         {statCards.map((card) => (
-          <div key={card.label} className="bg-white rounded-2xl p-5 shadow-sm">
+          <div key={card.label} className="bg-white rounded-2xl p-4 md:p-5 shadow-sm">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: card.bg }}>
-                <card.icon size={20} style={{ color: card.color }} />
+              <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center" style={{ background: card.bg }}>
+                <card.icon size={18} style={{ color: card.color }} />
               </div>
               <span
                 className="text-xs font-medium px-2 py-0.5 rounded-full"
@@ -140,7 +140,7 @@ export default function AdminDashboard() {
                 {card.change}
               </span>
             </div>
-            <p className={`font-bold leading-tight ${card.small ? "text-sm" : "text-2xl"}`} style={{ color: "#14110d" }}>
+            <p className={`font-bold leading-tight ${card.small ? "text-xs md:text-sm" : "text-xl md:text-2xl"}`} style={{ color: "#14110d" }}>
               {card.value}
             </p>
             <p className="text-xs mt-1" style={{ color: "#b08a4a99" }}>{card.label}</p>
@@ -149,9 +149,9 @@ export default function AdminDashboard() {
       </div>
 
       {/* Charts row */}
-      <div className="grid grid-cols-3 gap-5">
-        <div className="col-span-2 bg-white rounded-2xl p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
             <h2 className="font-semibold" style={{ color: "#14110d" }}>Statistiques des ventes</h2>
             <div className="flex items-center gap-4 text-xs" style={{ color: "#b08a4a99" }}>
               <span className="flex items-center gap-1.5">
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
           <LineChart data={salesData} data2={salesDataPrev} labels={months} height={140} color="#b08a4a" color2="#d9b89a" />
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold" style={{ color: "#14110d" }}>Meilleures ventes</h2>
             <a href="/admin/catalog/products" className="text-xs font-medium" style={{ color: "#b08a4a" }}>
@@ -192,7 +192,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Visitors chart */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold" style={{ color: "#14110d" }}>Visiteurs uniques</h2>
           <span className="text-xs px-3 py-1 rounded-lg" style={{ background: "#f0ebe0", color: "#b08a4a" }}>Hebdomadaire</span>

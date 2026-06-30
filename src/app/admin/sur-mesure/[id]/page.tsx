@@ -23,7 +23,7 @@ function DetailRow({ label, value }: { label: string; value?: string | boolean }
   const display = value === true ? "Oui" : value === false ? "Non" : value || "—";
   return (
     <div className="flex justify-between items-start py-2.5 border-b" style={{ borderColor: "#f0ebe0" }}>
-      <span className="text-xs font-semibold" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>{label}</span>
+      <span className="text-xs font-semibold mr-3" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>{label}</span>
       <span className="text-sm text-right max-w-[60%]" style={{ color: "#14110d" }}>{display}</span>
     </div>
   );
@@ -50,20 +50,20 @@ export default function SurMesureDetailPage() {
   const currentStepIndex = STATUS_PIPELINE.indexOf(req.status);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
+    <div className="max-w-5xl mx-auto space-y-5 md:space-y-6">
 
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-start gap-3 justify-between">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => router.back()}
-            className="w-9 h-9 rounded-xl flex items-center justify-center bg-white shadow-sm hover:bg-gray-50 transition-colors"
+            className="w-9 h-9 rounded-xl flex items-center justify-center bg-white shadow-sm hover:bg-gray-50 transition-colors flex-shrink-0"
           >
             <ArrowLeft size={16} className="text-gray-500" />
           </button>
           <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-semibold" style={{ color: "#14110d" }}>#{req.id}</h1>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-xl md:text-2xl font-semibold" style={{ color: "#14110d" }}>#{req.id}</h1>
               <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ background: sc.bg, color: sc.text }}>
                 {req.status}
               </span>
@@ -71,75 +71,76 @@ export default function SurMesureDetailPage() {
             <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>{req.customer} · {req.date}</p>
           </div>
         </div>
-        <div className="flex gap-2">
-          <button
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
-            style={{ background: "#b08a4a" }}
-          >
-            Changer le statut
-            <ChevronDown size={14} />
-          </button>
-        </div>
+        <button
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white flex-shrink-0"
+          style={{ background: "#b08a4a" }}
+        >
+          <span className="hidden sm:inline">Changer le statut</span>
+          <span className="sm:hidden">Statut</span>
+          <ChevronDown size={14} />
+        </button>
       </div>
 
       {/* Pipeline */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-        <h2 className="font-semibold text-sm mb-5" style={{ color: "#14110d" }}>Avancement de la commande</h2>
-        <div className="flex items-center gap-0">
-          {STATUS_PIPELINE.map((status, i) => {
-            const done = i < currentStepIndex;
-            const active = i === currentStepIndex;
-            const sc2 = statusColor[status] ?? { bg: "#F3F4F6", text: "#6B7280" };
-            return (
-              <div key={status} className="flex items-center flex-1 last:flex-none">
-                <div className="flex flex-col items-center gap-1.5">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-                    style={{
-                      background: done ? "#b08a4a" : active ? "#14110d" : "transparent",
-                      border: done || active ? "none" : "1.5px solid #e8d9bd",
-                    }}
-                  >
-                    {done
-                      ? <CheckCircle size={16} color="#fff" />
-                      : active
-                        ? <Scissors size={14} color="#f6f1e6" />
-                        : <Circle size={14} color="#e8d9bd" />
-                    }
+      <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
+        <h2 className="font-semibold text-sm mb-4 md:mb-5" style={{ color: "#14110d" }}>Avancement de la commande</h2>
+        <div className="overflow-x-auto">
+          <div className="flex items-center gap-0 min-w-[400px]">
+            {STATUS_PIPELINE.map((status, i) => {
+              const done = i < currentStepIndex;
+              const active = i === currentStepIndex;
+              const sc2 = statusColor[status] ?? { bg: "#F3F4F6", text: "#6B7280" };
+              return (
+                <div key={status} className="flex items-center flex-1 last:flex-none">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div
+                      className="w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all"
+                      style={{
+                        background: done ? "#b08a4a" : active ? "#14110d" : "transparent",
+                        border: done || active ? "none" : "1.5px solid #e8d9bd",
+                      }}
+                    >
+                      {done
+                        ? <CheckCircle size={14} color="#fff" />
+                        : active
+                          ? <Scissors size={12} color="#f6f1e6" />
+                          : <Circle size={12} color="#e8d9bd" />
+                      }
+                    </div>
+                    <span
+                      className="text-[8px] md:text-[9px] font-semibold text-center leading-tight max-w-[56px] md:max-w-[72px]"
+                      style={{ color: active ? "#14110d" : done ? "#b08a4a" : "#d9b89a", fontFamily: "var(--font-nav)" }}
+                    >
+                      {status}
+                    </span>
                   </div>
-                  <span
-                    className="text-[9px] font-semibold text-center leading-tight hidden lg:block max-w-[72px]"
-                    style={{ color: active ? "#14110d" : done ? "#b08a4a" : "#d9b89a", fontFamily: "var(--font-nav)" }}
-                  >
-                    {status}
-                  </span>
+                  {i < STATUS_PIPELINE.length - 1 && (
+                    <div className="flex-1 h-px mx-1 mb-5 transition-all" style={{ background: done ? "#b08a4a" : "#e8d9bd" }} />
+                  )}
                 </div>
-                {i < STATUS_PIPELINE.length - 1 && (
-                  <div className="flex-1 h-px mx-1 mb-5 transition-all" style={{ background: done ? "#b08a4a" : "#e8d9bd" }} />
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
         {/* Left — garment details */}
-        <div className="col-span-2 space-y-5">
+        <div className="lg:col-span-2 space-y-4 md:space-y-5">
 
           {/* Garment specs */}
           <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
+            <div className="px-4 md:px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
               <h2 className="font-semibold text-sm" style={{ color: "#14110d" }}>Spécifications de la pièce</h2>
             </div>
-            <div className="px-6 py-4 space-y-0">
+            <div className="px-4 md:px-6 py-4 space-y-0">
               <DetailRow label="Type de pièce" value={req.piece} />
               <DetailRow label="Tissu wax" value={req.wax} />
               <DetailRow label="Silhouette / modèle" value={req.silhouette} />
               {req.inspirationImage && (
                 <div className="py-3 border-b" style={{ borderColor: "#f0ebe0" }}>
-                  <p className="text-xs font-semibold mb-2" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>Image d'inspiration</p>
-                  <div className="w-32 h-32 rounded-xl flex items-center justify-center text-xs text-gray-400" style={{ background: "#f0ebe0" }}>
+                  <p className="text-xs font-semibold mb-2" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>Image d&apos;inspiration</p>
+                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-xl flex items-center justify-center text-xs text-gray-400" style={{ background: "#f0ebe0" }}>
                     Image importée
                   </div>
                 </div>
@@ -149,10 +150,10 @@ export default function SurMesureDetailPage() {
 
           {/* Measurements */}
           <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
+            <div className="px-4 md:px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
               <h2 className="font-semibold text-sm" style={{ color: "#14110d" }}>Mesures</h2>
             </div>
-            <div className="px-6 py-4">
+            <div className="px-4 md:px-6 py-4">
               {req.noMeasurements ? (
                 <div className="flex items-center gap-3 p-4 rounded-xl" style={{ background: "#fdf5e8" }}>
                   <AlertCircle size={16} style={{ color: "#b08a4a" }} />
@@ -161,7 +162,7 @@ export default function SurMesureDetailPage() {
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
                   {Object.entries(req.measurements).map(([key, val]) => {
                     const labels: Record<string, string> = {
                       poitrine: "Poitrine", taille: "Taille", hanches: "Hanches",
@@ -170,7 +171,7 @@ export default function SurMesureDetailPage() {
                     };
                     return (
                       <div key={key} className="text-center p-3 rounded-xl" style={{ background: "#f0ebe0" }}>
-                        <p className="text-lg font-bold" style={{ color: "#14110d" }}>{val} <span className="text-xs font-normal">cm</span></p>
+                        <p className="text-base md:text-lg font-bold" style={{ color: "#14110d" }}>{val} <span className="text-xs font-normal">cm</span></p>
                         <p className="text-[10px] mt-0.5" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>{labels[key] ?? key}</p>
                       </div>
                     );
@@ -182,11 +183,11 @@ export default function SurMesureDetailPage() {
 
           {/* Finitions */}
           <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
+            <div className="px-4 md:px-6 py-4 border-b" style={{ borderColor: "#f0ebe0" }}>
               <h2 className="font-semibold text-sm" style={{ color: "#14110d" }}>Finitions choisies</h2>
             </div>
-            <div className="px-6 py-4">
-              <div className="grid grid-cols-2 gap-x-8">
+            <div className="px-4 md:px-6 py-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                 <div>
                   <DetailRow label="Type de col" value={req.col} />
                   <DetailRow label="Manches" value={req.manches} />
@@ -203,9 +204,8 @@ export default function SurMesureDetailPage() {
             </div>
           </div>
 
-          {/* Note */}
           {req.note && (
-            <div className="bg-white rounded-2xl shadow-sm p-6">
+            <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
               <h2 className="font-semibold text-sm mb-3" style={{ color: "#14110d" }}>Note de la cliente</h2>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280", fontStyle: "italic" }}>« {req.note} »</p>
             </div>
@@ -213,30 +213,30 @@ export default function SurMesureDetailPage() {
         </div>
 
         {/* Right — client + financials */}
-        <div className="space-y-5">
+        <div className="space-y-4 md:space-y-5">
           {/* Client */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
             <h2 className="font-semibold text-sm mb-4" style={{ color: "#14110d" }}>Cliente</h2>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold" style={{ background: "#b08a4a" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold flex-shrink-0" style={{ background: "#b08a4a" }}>
                 {req.customer.charAt(0)}
               </div>
               <p className="font-semibold text-sm" style={{ color: "#14110d" }}>{req.customer}</p>
             </div>
             <div className="space-y-2.5 text-sm">
               <div className="flex items-center gap-2.5">
-                <Mail size={13} style={{ color: "#b08a4a" }} />
-                <span style={{ color: "#6B7280" }}>{req.email}</span>
+                <Mail size={13} className="flex-shrink-0" style={{ color: "#b08a4a" }} />
+                <span className="break-all" style={{ color: "#6B7280" }}>{req.email}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone size={13} style={{ color: "#b08a4a" }} />
+                <Phone size={13} className="flex-shrink-0" style={{ color: "#b08a4a" }} />
                 <span style={{ color: "#6B7280" }}>{req.phone}</span>
               </div>
             </div>
           </div>
 
           {/* Financials */}
-          <div className="rounded-2xl p-5" style={{ background: "#fdf5e8" }}>
+          <div className="rounded-2xl p-4 md:p-5" style={{ background: "#fdf5e8" }}>
             <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: "#b08a4a", fontFamily: "var(--font-nav)" }}>
               Suivi financier
             </p>

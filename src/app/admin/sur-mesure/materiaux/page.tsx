@@ -66,20 +66,21 @@ export default function MateriauxPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-end justify-between">
+      <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="text-2xl font-semibold" style={{ color: "#14110d" }}>Matières & Tissus</h1>
+          <h1 className="text-xl md:text-2xl font-semibold" style={{ color: "#14110d" }}>Matières & Tissus</h1>
           <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>
             {active} matières actives sur {materials.length} — ces options s&apos;affichent dans le formulaire Sur Mesure.
           </p>
         </div>
         <button
           onClick={startAdd}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white flex-shrink-0"
           style={{ background: "#b08a4a" }}
         >
           <Plus size={16} />
-          Ajouter une matière
+          <span className="hidden sm:inline">Ajouter une matière</span>
+          <span className="sm:hidden">Ajouter</span>
         </button>
       </div>
 
@@ -92,7 +93,7 @@ export default function MateriauxPage() {
       )}
 
       {/* Grid */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {materials.map((m) => (
           <div
             key={m.id}

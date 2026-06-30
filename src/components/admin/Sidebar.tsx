@@ -12,6 +12,7 @@ import {
   Scissors,
   ChevronDown,
   ChevronRight,
+  X,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -44,7 +45,12 @@ const nav = [
   { href: "/admin/reports", label: "Rapports", icon: BarChart2 },
 ];
 
-export default function AdminSidebar() {
+interface Props {
+  isMobileOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function AdminSidebar({ isMobileOpen = false, onClose }: Props) {
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<string[]>(() => {
     const open: string[] = [];
@@ -59,22 +65,37 @@ export default function AdminSidebar() {
     );
 
   return (
-    <aside className="w-64 flex-shrink-0 flex flex-col" style={{ background: "#1a0e07" }}>
-      {/* Logo */}
+    <aside
+      className={[
+        "fixed inset-y-0 left-0 z-40 w-64 flex-shrink-0 flex flex-col",
+        "transform transition-transform duration-300 ease-in-out",
+        "md:relative md:translate-x-0",
+        isMobileOpen ? "translate-x-0" : "-translate-x-full",
+      ].join(" ")}
+      style={{ background: "#1a0e07" }}
+    >
+      {/* Logo + mobile close */}
       <div className="px-6 py-7 flex items-center gap-3">
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
+          className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
           style={{ background: "rgba(255,255,255,0.2)" }}
         >
           EG
         </div>
-        <span className="text-white font-semibold text-sm tracking-wide">
+        <span className="text-white font-semibold text-sm tracking-wide flex-1">
           Ethnicgeneration
         </span>
+        <button
+          className="md:hidden p-1 rounded-lg text-white/60 hover:text-white transition-colors"
+          onClick={onClose}
+          aria-label="Fermer le menu"
+        >
+          <X size={18} />
+        </button>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 pb-6 space-y-0.5">
+      <nav className="flex-1 px-3 pb-6 space-y-0.5 overflow-y-auto">
         {nav.map((item) => {
           const isActive =
             item.href === "/admin"
@@ -105,6 +126,7 @@ export default function AdminSidebar() {
                         <Link
                           key={child.href}
                           href={child.href}
+                          onClick={onClose}
                           className="block px-3 py-2 rounded-lg text-xs transition-all"
                           style={{
                             color: childActive ? "#fff" : "rgba(255,255,255,0.55)",
@@ -125,6 +147,7 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all"
               style={{
                 color: isActive ? "#fff" : "rgba(255,255,255,0.65)",

@@ -49,17 +49,17 @@ const reportCards = [
 
 export default function ReportsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 md:space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-800">Rapports</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-800">Rapports</h1>
         <p className="text-sm text-gray-400 mt-0.5">Performances globales — Juin 2026</p>
       </div>
 
       {/* KPI cards */}
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
         {reportCards.map((card) => (
-          <div key={card.label} className="bg-white rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-2">
+          <div key={card.label} className="bg-white rounded-2xl p-4 md:p-5 shadow-sm">
+            <div className="flex items-center justify-between mb-2 flex-wrap gap-1">
               <div className="flex items-center gap-2">
                 <card.icon size={15} style={{ color: card.color }} />
                 <span className="text-xs text-gray-400">{card.label}</span>
@@ -72,17 +72,17 @@ export default function ReportsPage() {
                 {card.change}
               </span>
             </div>
-            <p className="text-2xl font-bold text-gray-800 mb-3">{card.value}</p>
+            <p className="text-xl md:text-2xl font-bold text-gray-800 mb-3">{card.value}</p>
             <MiniLineChart data={card.data} color={card.color} />
           </div>
         ))}
       </div>
 
       {/* Monthly breakdown */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
         <h2 className="font-semibold text-gray-800 mb-5">Ventes mensuelles — comparaison annuelle</h2>
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[500px]">
             <thead>
               <tr className="border-b border-gray-50">
                 <th className="text-left text-xs font-medium text-gray-400 py-3">Mois</th>

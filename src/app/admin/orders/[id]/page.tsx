@@ -33,67 +33,68 @@ export default function OrderDetailPage() {
   const sc = statusColors[detail.status] ?? { bg: "#F3F4F6", text: "#6B7280" };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-5 md:space-y-6 max-w-5xl mx-auto">
       {/* Back + header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-start gap-3 justify-between">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => router.back()}
-            className="w-9 h-9 rounded-xl flex items-center justify-center bg-white shadow-sm hover:bg-gray-50 transition-colors"
+            className="w-9 h-9 rounded-xl flex items-center justify-center bg-white shadow-sm hover:bg-gray-50 transition-colors flex-shrink-0"
           >
             <ArrowLeft size={16} className="text-gray-500" />
           </button>
           <div>
-            <h1 className="text-2xl font-semibold" style={{ color: "#14110d" }}>
+            <h1 className="text-xl md:text-2xl font-semibold" style={{ color: "#14110d" }}>
               #{order.id}
             </h1>
             <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>{detail.date}</p>
           </div>
           <span
-            className="ml-2 text-xs font-medium px-3 py-1 rounded-full"
+            className="text-xs font-medium px-3 py-1 rounded-full"
             style={{ background: sc.bg, color: sc.text }}
           >
             {detail.status}
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white shadow-sm text-sm text-gray-600 hover:bg-gray-50 transition-colors">
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl bg-white shadow-sm text-sm text-gray-600 hover:bg-gray-50 transition-colors">
             <Printer size={14} />
-            Imprimer
+            <span className="hidden sm:inline">Imprimer</span>
           </button>
           <button
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
+            className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl text-sm font-medium text-white"
             style={{ background: "#b08a4a" }}
           >
-            Changer le statut
+            <span className="hidden sm:inline">Changer le statut</span>
+            <span className="sm:hidden">Statut</span>
             <ChevronDown size={14} />
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
         {/* Left column — items + summary */}
-        <div className="col-span-2 space-y-5">
+        <div className="lg:col-span-2 space-y-4 md:space-y-5">
 
           {/* Items */}
           <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-50">
+            <div className="px-4 md:px-6 py-4 border-b border-gray-50">
               <h2 className="font-semibold text-sm" style={{ color: "#14110d" }}>Articles commandés</h2>
             </div>
             <div className="divide-y divide-gray-50">
               {detail.items.map((item, i) => (
-                <div key={i} className="flex items-center gap-4 px-6 py-4">
-                  <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0" style={{ background: "#f0ebe0" }}>
+                <div key={i} className="flex items-center gap-3 md:gap-4 px-4 md:px-6 py-4">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden flex-shrink-0" style={{ background: "#f0ebe0" }}>
                     <Image src={item.image} alt={item.name} width={56} height={56} className="w-full h-full object-cover" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-sm" style={{ color: "#14110d" }}>{item.name}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm truncate" style={{ color: "#14110d" }}>{item.name}</p>
                     <p className="text-xs mt-0.5" style={{ color: "#b08a4a99" }}>
                       Taille : {item.size} · Qté : {item.qty}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex-shrink-0">
                     <p className="font-semibold text-sm" style={{ color: "#14110d" }}>{item.total}</p>
                     <p className="text-xs mt-0.5" style={{ color: "#b08a4a99" }}>
                       {item.qty > 1 ? `${item.unitPrice} / unité` : ""}
@@ -104,7 +105,7 @@ export default function OrderDetailPage() {
             </div>
 
             {/* Totals */}
-            <div className="px-6 py-4 border-t" style={{ borderColor: "#f0ebe0" }}>
+            <div className="px-4 md:px-6 py-4 border-t" style={{ borderColor: "#f0ebe0" }}>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-gray-500">
                   <span>Sous-total</span>
@@ -123,14 +124,13 @@ export default function OrderDetailPage() {
           </div>
 
           {/* Timeline */}
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+          <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
             <h2 className="font-semibold text-sm mb-5" style={{ color: "#14110d" }}>Suivi de la commande</h2>
             <div className="space-y-0">
               {detail.timeline.map((step, i) => {
                 const isLast = i === detail.timeline.length - 1;
                 return (
                   <div key={i} className="flex gap-4">
-                    {/* Icon + connector */}
                     <div className="flex flex-col items-center">
                       {step.done ? (
                         <CheckCircle size={20} style={{ color: "#b08a4a" }} className="flex-shrink-0" />
@@ -144,7 +144,6 @@ export default function OrderDetailPage() {
                         />
                       )}
                     </div>
-                    {/* Label */}
                     <div className="pb-5">
                       <p
                         className="text-sm font-medium"
@@ -162,9 +161,8 @@ export default function OrderDetailPage() {
             </div>
           </div>
 
-          {/* Note */}
           {detail.note && (
-            <div className="bg-white rounded-2xl shadow-sm p-6">
+            <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
               <h2 className="font-semibold text-sm mb-2" style={{ color: "#14110d" }}>Note client</h2>
               <p className="text-sm" style={{ color: "#6B7280" }}>{detail.note}</p>
             </div>
@@ -172,8 +170,8 @@ export default function OrderDetailPage() {
         </div>
 
         {/* Right column — customer info */}
-        <div className="space-y-5">
-          <div className="bg-white rounded-2xl shadow-sm p-6">
+        <div className="space-y-4 md:space-y-5">
+          <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
             <h2 className="font-semibold text-sm mb-4" style={{ color: "#14110d" }}>Informations client</h2>
             <div className="flex items-center gap-3 mb-4">
               <div
@@ -189,7 +187,7 @@ export default function OrderDetailPage() {
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
                 <Mail size={14} className="mt-0.5 flex-shrink-0" style={{ color: "#b08a4a" }} />
-                <span style={{ color: "#6B7280" }}>{detail.customer.email}</span>
+                <span className="break-all" style={{ color: "#6B7280" }}>{detail.customer.email}</span>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={14} className="mt-0.5 flex-shrink-0" style={{ color: "#b08a4a" }} />
@@ -202,8 +200,7 @@ export default function OrderDetailPage() {
             </div>
           </div>
 
-          {/* Order summary card */}
-          <div className="rounded-2xl p-5" style={{ background: "#fdf5e8" }}>
+          <div className="rounded-2xl p-4 md:p-5" style={{ background: "#fdf5e8" }}>
             <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#b08a4a" }}>
               Résumé
             </p>
