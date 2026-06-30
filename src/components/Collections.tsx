@@ -6,20 +6,20 @@ import { ArrowRight } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 
 const CARDS = [
-  { eyebrowKey: "col1Kicker", nameKey: "col1Name", gradient: "linear-gradient(160deg,#5e3d28 0%,#2a1d13 100%)" },
-  { eyebrowKey: "col2Kicker", nameKey: "col2Name", gradient: "linear-gradient(160deg,#3a2618 0%,#1a1410 100%)" },
-  { eyebrowKey: "col3Kicker", nameKey: "col3Name", gradient: "linear-gradient(200deg,#6b4226 0%,#2f2118 100%)" },
+  { eyebrowKey: "col1Kicker", nameKey: "col1Name", image: "/product-1.png" },
+  { eyebrowKey: "col2Kicker", nameKey: "col2Name", image: "/product-2.png" },
+  { eyebrowKey: "col3Kicker", nameKey: "col3Name", image: "/product-3.png" },
 ];
 
 function CollectionCard({
   eyebrowKey,
   nameKey,
-  gradient,
+  image,
   delay,
 }: {
   eyebrowKey: string;
   nameKey: string;
-  gradient: string;
+  image: string;
   delay: number;
 }) {
   const { t } = useLang();
@@ -37,26 +37,21 @@ function CollectionCard({
       <a
         href="#"
         className="block relative overflow-hidden"
-        style={{ aspectRatio: "3/4", background: "#ebe4d2" }}
+        style={{ aspectRatio: "3/4", background: "#ede7d9" }}
       >
         <div
           className="absolute inset-0 transition-transform duration-[1400ms]"
-          style={{
-            background: gradient,
-            transform: "scale(1)",
-          }}
+          style={{ transform: "scale(1)" }}
           onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1.05)")}
           onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")}
-        />
-        {/* Wax texture */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 28% 32%, rgba(246,241,230,.04) 0 18px, transparent 19px), radial-gradient(circle at 72% 68%, rgba(246,241,230,.035) 0 22px, transparent 23px), repeating-linear-gradient(45deg, transparent 0 22px, rgba(246,241,230,.018) 22px 23px)",
-            mixBlendMode: "overlay",
-          }}
-        />
+        >
+          <img
+            src={image}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "top center" }}
+          />
+        </div>
       </a>
       <div className="flex flex-col items-center text-center gap-3.5 px-3">
         <div

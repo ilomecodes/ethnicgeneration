@@ -13,10 +13,10 @@ export const visitData = [32000, 41000, 28000, 45000, 38000, 47000, 26000];
 export const days = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
 
 export const topProducts = [
-  { id: 1, name: "Robe Kaba Wax Maxi", price: "59 000 FCFA", image: "/plate-women.png", sales: 184 },
-  { id: 2, name: "Boubou Homme Brodé", price: "85 000 FCFA", image: "/plate-men.png", sales: 142 },
-  { id: 3, name: "Ensemble Enfant Wax", price: "33 000 FCFA", image: "/plate-kids.png", sales: 97 },
-  { id: 4, name: "Robe Patchwork Wax", price: "52 000 FCFA", image: "/plate-women.png", sales: 76 },
+  { id: 1, name: "Robe Patchwork Wax",    price: "59 000 FCFA", image: "/product-1.png", sales: 184 },
+  { id: 2, name: "Boubou Violet Zigzag",  price: "85 000 FCFA", image: "/product-2.png", sales: 142 },
+  { id: 3, name: "Robe Kente Courte",     price: "48 000 FCFA", image: "/product-3.png", sales: 97  },
+  { id: 4, name: "Haut Cercles Oranges",  price: "38 000 FCFA", image: "/product-4.png", sales: 76  },
 ];
 
 export const orders = [
@@ -43,7 +43,7 @@ export const orderDetails: Record<string, {
 }> = {
   "ORD-1024": {
     customer: { name: "Amina Koné", email: "amina.kone@email.com", phone: "+33 6 12 34 56 78", address: "12 rue des Fleurs, 75011 Paris, France" },
-    items: [{ name: "Robe Kaba Wax Maxi", size: "M", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/plate-women.png" }],
+    items: [{ name: "Robe Kaba Wax Maxi", size: "M", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/product-1.png" }],
     subtotal: "59 000 FCFA", shipping: "3 200 FCFA", total: "62 200 FCFA",
     status: "Livré", date: "28 Jun 2026",
     timeline: [
@@ -57,7 +57,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1023": {
     customer: { name: "Fatou Diallo", email: "fatou.diallo@email.com", phone: "+32 4 87 65 43 21", address: "Rue de la Loi 44, 1000 Bruxelles, Belgique" },
-    items: [{ name: "Boubou Homme Brodé", size: "L", qty: 1, unitPrice: "85 000 FCFA", total: "85 000 FCFA", image: "/plate-men.png" }],
+    items: [{ name: "Boubou Homme Brodé", size: "L", qty: 1, unitPrice: "85 000 FCFA", total: "85 000 FCFA", image: "/product-2.png" }],
     subtotal: "85 000 FCFA", shipping: "3 200 FCFA", total: "88 200 FCFA",
     status: "En cours", date: "27 Jun 2026",
     timeline: [
@@ -71,7 +71,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1022": {
     customer: { name: "Mariama Bah", email: "mariama.bah@email.com", phone: "+33 7 98 76 54 32", address: "5 allée des Roses, 69003 Lyon, France" },
-    items: [{ name: "Ensemble Enfant Wax", size: "6 ans", qty: 1, unitPrice: "33 000 FCFA", total: "33 000 FCFA", image: "/plate-kids.png" }],
+    items: [{ name: "Ensemble Enfant Wax", size: "6 ans", qty: 1, unitPrice: "33 000 FCFA", total: "33 000 FCFA", image: "/product-3.png" }],
     subtotal: "33 000 FCFA", shipping: "3 200 FCFA", total: "36 200 FCFA",
     status: "Livré", date: "26 Jun 2026",
     timeline: [
@@ -85,7 +85,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1021": {
     customer: { name: "Kadiatou Sow", email: "kadiatou.sow@email.com", phone: "+1 514 555 0199", address: "3400 Rue Jean-Talon E, Montréal, QC H2A 1Y9, Canada" },
-    items: [{ name: "Robe Patchwork Wax", size: "S", qty: 1, unitPrice: "52 000 FCFA", total: "52 000 FCFA", image: "/plate-women.png" }],
+    items: [{ name: "Robe Patchwork Wax", size: "S", qty: 1, unitPrice: "52 000 FCFA", total: "52 000 FCFA", image: "/product-1.png" }],
     subtotal: "52 000 FCFA", shipping: "3 200 FCFA", total: "55 200 FCFA",
     status: "Expédié", date: "25 Jun 2026",
     timeline: [
@@ -99,7 +99,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1020": {
     customer: { name: "Aissatou Barry", email: "aissatou.barry@email.com", phone: "+33 6 45 67 89 01", address: "28 avenue Victor Hugo, 13001 Marseille, France" },
-    items: [{ name: "Robe Kaba Wax Maxi", size: "L", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/plate-women.png" }],
+    items: [{ name: "Robe Kaba Wax Maxi", size: "L", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/product-1.png" }],
     subtotal: "59 000 FCFA", shipping: "3 200 FCFA", total: "62 200 FCFA",
     status: "Livré", date: "24 Jun 2026",
     timeline: [
@@ -113,7 +113,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1019": {
     customer: { name: "Mariam Traoré", email: "mariam.traore@email.com", phone: "+33 6 11 22 33 44", address: "7 rue du Marché, 67000 Strasbourg, France" },
-    items: [{ name: "Boubou Homme Brodé", size: "XL", qty: 1, unitPrice: "85 000 FCFA", total: "85 000 FCFA", image: "/plate-men.png" }],
+    items: [{ name: "Boubou Homme Brodé", size: "XL", qty: 1, unitPrice: "85 000 FCFA", total: "85 000 FCFA", image: "/product-2.png" }],
     subtotal: "85 000 FCFA", shipping: "3 200 FCFA", total: "88 200 FCFA",
     status: "Annulé", date: "23 Jun 2026",
     timeline: [
@@ -126,7 +126,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1018": {
     customer: { name: "Hawa Camara", email: "hawa.camara@email.com", phone: "+33 6 77 88 99 00", address: "19 boulevard Gambetta, 33000 Bordeaux, France" },
-    items: [{ name: "Ensemble Enfant Wax", size: "8 ans", qty: 1, unitPrice: "33 000 FCFA", total: "33 000 FCFA", image: "/plate-kids.png" }],
+    items: [{ name: "Ensemble Enfant Wax", size: "8 ans", qty: 1, unitPrice: "33 000 FCFA", total: "33 000 FCFA", image: "/product-3.png" }],
     subtotal: "33 000 FCFA", shipping: "3 200 FCFA", total: "36 200 FCFA",
     status: "Livré", date: "22 Jun 2026",
     timeline: [
@@ -140,7 +140,7 @@ export const orderDetails: Record<string, {
   },
   "ORD-1017": {
     customer: { name: "Oumou Sidibé", email: "oumou.sidibe@email.com", phone: "+33 6 55 44 33 22", address: "42 rue Saint-Denis, 75001 Paris, France" },
-    items: [{ name: "Robe Patchwork Wax", size: "M", qty: 1, unitPrice: "52 000 FCFA", total: "52 000 FCFA", image: "/plate-women.png" }],
+    items: [{ name: "Robe Patchwork Wax", size: "M", qty: 1, unitPrice: "52 000 FCFA", total: "52 000 FCFA", image: "/product-1.png" }],
     subtotal: "52 000 FCFA", shipping: "3 200 FCFA", total: "55 200 FCFA",
     status: "En cours", date: "21 Jun 2026",
     timeline: [
@@ -156,7 +156,7 @@ export const orderDetails: Record<string, {
 
 export const megaCategories = [
   {
-    id: 1, name: "Femmes", slug: "femmes", image: "/plate-women.png", productCount: 48,
+    id: 1, name: "Femmes", slug: "femmes", image: "/product-1.png", productCount: 48,
     subcategories: [
       { id: 101, name: "Kaba Africain", slug: "kaba-africain", productCount: 14 },
       { id: 102, name: "Robes Wax", slug: "robes-wax", productCount: 18 },
@@ -165,7 +165,7 @@ export const megaCategories = [
     ],
   },
   {
-    id: 2, name: "Hommes", slug: "hommes", image: "/plate-men.png", productCount: 32,
+    id: 2, name: "Hommes", slug: "hommes", image: "/product-2.png", productCount: 32,
     subcategories: [
       { id: 201, name: "Boubou", slug: "boubou", productCount: 12 },
       { id: 202, name: "Chemises Wax", slug: "chemises-wax", productCount: 10 },
@@ -173,7 +173,7 @@ export const megaCategories = [
     ],
   },
   {
-    id: 3, name: "Enfants", slug: "enfants", image: "/plate-kids.png", productCount: 24,
+    id: 3, name: "Enfants", slug: "enfants", image: "/product-3.png", productCount: 24,
     subcategories: [
       { id: 301, name: "Robes Enfant", slug: "robes-enfant", productCount: 9 },
       { id: 302, name: "Ensembles Enfant", slug: "ensembles-enfant", productCount: 9 },
@@ -181,7 +181,7 @@ export const megaCategories = [
     ],
   },
   {
-    id: 4, name: "Accessoires", slug: "accessoires", image: "/plate-women.png", productCount: 18,
+    id: 4, name: "Accessoires", slug: "accessoires", image: "/product-1.png", productCount: 18,
     subcategories: [
       { id: 401, name: "Foulards & Turbans", slug: "foulards-turbans", productCount: 10 },
       { id: 402, name: "Sacs", slug: "sacs", productCount: 8 },
