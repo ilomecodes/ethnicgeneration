@@ -1,3 +1,19 @@
+export interface Subcategory {
+  id: number;
+  name: string;
+  slug: string;
+  productCount: number;
+}
+
+export interface MegaCategory {
+  id: number;
+  name: string;
+  slug: string;
+  image: string;
+  productCount: number;
+  subcategories: Subcategory[];
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -309,6 +325,13 @@ export const megaCategories = [
     subcategories: [
       { id: 401, name: "Foulards & Turbans", slug: "foulards-turbans", productCount: 10 },
       { id: 402, name: "Sacs", slug: "sacs", productCount: 8 },
+    ],
+  },
+  {
+    id: 5, name: "Linge de maison", slug: "linge-de-maison", image: "/product-2.png", productCount: 12,
+    subcategories: [
+      { id: 501, name: "Coussins & Housses", slug: "coussins-housses", productCount: 6 },
+      { id: 502, name: "Nappes & Sets de table", slug: "nappes-sets", productCount: 6 },
     ],
   },
 ];

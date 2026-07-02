@@ -93,15 +93,6 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
             style={{ color: linkColor, transition: "color .4s" }}
           >
             <a
-              href="#"
-              className="no-underline"
-              style={{ color: linkColor, transition: "color .25s" }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = scrolledPast ? mocha : mocha2)}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = linkColor)}
-            >
-              {t("navAtelier")}
-            </a>
-            <a
               href="/boutique"
               className="no-underline"
               style={{ color: linkColor, transition: "color .25s" }}
@@ -280,9 +271,8 @@ export default function Nav({ scrolledPast, onOpenDrawer }: NavProps) {
               {/* Links */}
               <nav className="flex-1 px-6 flex flex-col gap-1">
                 {[
-                  { label: t("navAtelier"), href: "#" },
                   { label: t("navStores"), href: "/boutique" },
-                  { label: user ? t("navAccount") : t("navAccount"), href: user ? "/compte" : "/connexion" },
+                  { label: t("navAccount"), href: user ? "/compte" : "/connexion" },
                 ].map(({ label, href }) => (
                   <a
                     key={label}
