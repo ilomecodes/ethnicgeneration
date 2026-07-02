@@ -160,7 +160,8 @@ export const topProducts = [
 ];
 
 export const orders = [
-  { id: "ORD-1024", customer: "Amina Koné",      product: "Robe Kaba Wax Maxi",   date: "28 Jun 2026", amount: "62 200 FCFA",  status: "Livré" },
+  { id: "ORD-1025", customer: "Nana Ouédraogo",   product: "Robe Patchwork Wax",   date: "2 Jul 2026",  amount: "62 200 FCFA",  status: "En cours" },
+  { id: "ORD-1024", customer: "Amina Koné",       product: "Robe Kaba Wax Maxi",   date: "28 Jun 2026", amount: "62 200 FCFA",  status: "Livré" },
   { id: "ORD-1023", customer: "Fatou Diallo",     product: "Boubou Homme Brodé",   date: "27 Jun 2026", amount: "88 200 FCFA",  status: "En cours" },
   { id: "ORD-1022", customer: "Mariama Bah",      product: "Ensemble Enfant Wax",  date: "26 Jun 2026", amount: "36 200 FCFA",  status: "Livré" },
   { id: "ORD-1021", customer: "Kadiatou Sow",     product: "Robe Patchwork Wax",   date: "25 Jun 2026", amount: "55 200 FCFA",  status: "Expédié" },
@@ -182,6 +183,20 @@ export const orderDetails: Record<string, {
   timeline: { label: string; date: string; done: boolean }[];
   note: string;
 }> = {
+  "ORD-1025": {
+    customer: { name: "Nana Ouédraogo", email: "nana.ouedraogo@email.com", phone: "+226 70 11 22 33", address: "Secteur 15, Rue 15-42, Ouagadougou, Burkina Faso" },
+    items: [{ name: "Robe Patchwork Wax", size: "M", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/product-1.png" }],
+    subtotal: "59 000 FCFA", shipping: "3 200 FCFA", total: "62 200 FCFA",
+    status: "En cours", date: "2 Jul 2026",
+    timeline: [
+      { label: "Commande passée",   date: "2 Jul · 10:47", done: true  },
+      { label: "Paiement confirmé", date: "",               done: false },
+      { label: "En préparation",    date: "",               done: false },
+      { label: "Expédié",           date: "",               done: false },
+      { label: "Livré",             date: "",               done: false },
+    ],
+    note: "Préfère une livraison après 18h.",
+  },
   "ORD-1024": {
     customer: { name: "Amina Koné", email: "amina.kone@email.com", phone: "+33 6 12 34 56 78", address: "12 rue des Fleurs, 75011 Paris, France" },
     items: [{ name: "Robe Kaba Wax Maxi", size: "M", qty: 1, unitPrice: "59 000 FCFA", total: "59 000 FCFA", image: "/product-1.png" }],
@@ -486,6 +501,7 @@ export const surMesureRequests = [
 export type OrderFulfillment = "livraison" | "click_and_collect";
 
 export const orderMeta: Record<string, { paymentMethod: string; fulfillmentType: OrderFulfillment }> = {
+  "ORD-1025": { paymentMethod: "Orange Money",            fulfillmentType: "livraison" },
   "ORD-1024": { paymentMethod: "Visa",                    fulfillmentType: "livraison" },
   "ORD-1023": { paymentMethod: "MTN MoMo",                fulfillmentType: "livraison" },
   "ORD-1022": { paymentMethod: "Orange Money",            fulfillmentType: "livraison" },
