@@ -1,12 +1,14 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, CheckCircle, Circle, Package, Truck, MapPin } from "lucide-react";
+import { ArrowLeft, CheckCircle, Circle, Package, Truck, MapPin, Store } from "lucide-react";
 import { myOrders, statusColors } from "@/lib/client-data";
+import { useOrders } from "@/context/OrdersContext";
 
 export default function CommandeDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const { details } = useOrders();
   const order = myOrders.find((o) => o.id === id);
 
   if (!order) {
@@ -20,17 +22,20 @@ export default function CommandeDetailPage() {
     );
   }
 
-  const sc = statusColors[order.status] ?? { bg: "#f3f4f6", color: "#6B7280" };
-  const lastDone = [...order.timeline].reverse().find((t) => t.done);
+  // Pull live data from admin context — fallback to static if not yet available
+  const liveDetail = details[order.id];
+  const liveStatus = liveDetail?.status ?? order.status;
+  const liveTimeline = liveDetail?.timeline ?? order.timeline;
+  const fulfillmentType = liveDetail?.fulfillmentType ?? "livraison";
+
+  const sc = statusColors[liveStatus] ?? { bg: "#f3f4f6", color: "#6B7280" };
+  const lastDone = [...liveTimeline].reverse().find((t) => t.done);
 
   return (
     <div className="space-y-5">
-      {/* Back + header */}
-      <div className="flex items-center gap-3">
-        <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm font-medium" style={{ color: "#b08a4a" }}>
-          <ArrowLeft size={15} /> Retour
-        </button>
-      </div>
+      <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm font-medium" style={{ color: "#b08a4a" }}>
+        <ArrowLeft size={15} /> Retour
+      </button>
 
       <div className="flex items-start justify-between">
         <div>
@@ -38,7 +43,7 @@ export default function CommandeDetailPage() {
           <p className="text-sm mt-0.5" style={{ color: "#b08a4a99" }}>Passée le {order.date}</p>
         </div>
         <span className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: sc.bg, color: sc.color }}>
-          {order.status}
+          {liveStatus}
         </span>
       </div>
 
@@ -58,17 +63,16 @@ export default function CommandeDetailPage() {
         <p className="text-xl font-bold flex-shrink-0" style={{ color: "#14110d" }}>{order.amount}</p>
       </div>
 
-      {/* Timeline */}
+      {/* Live Timeline */}
       <div className="bg-white rounded-2xl shadow-sm p-6">
         <h2 className="font-semibold text-sm mb-5" style={{ color: "#14110d" }}>Suivi de commande</h2>
         <div className="space-y-0">
-          {order.timeline.map((step, i) => {
-            const isLast = i === order.timeline.length - 1;
+          {liveTimeline.map((step, i) => {
+            const isLast = i === liveTimeline.length - 1;
             const isDone = step.done;
-            const isActive = isDone && (isLast || !order.timeline[i + 1]?.done);
+            const isActive = isDone && (isLast || !liveTimeline[i + 1]?.done);
             return (
               <div key={i} className="flex gap-4">
-                {/* Icon + line */}
                 <div className="flex flex-col items-center">
                   <div className="flex-shrink-0 mt-0.5">
                     {isDone
@@ -77,15 +81,17 @@ export default function CommandeDetailPage() {
                     }
                   </div>
                   {!isLast && (
-                    <div className="w-0.5 flex-1 my-1" style={{ background: isDone && order.timeline[i + 1]?.done ? "#b08a4a" : "#e8d9bd", minHeight: "24px" }} />
+                    <div
+                      className="w-0.5 flex-1 my-1"
+                      style={{
+                        background: isDone && liveTimeline[i + 1]?.done ? "#b08a4a" : "#e8d9bd",
+                        minHeight: "24px",
+                      }}
+                    />
                   )}
                 </div>
-                {/* Text */}
                 <div className="pb-5 flex-1">
-                  <p
-                    className="text-sm font-semibold"
-                    style={{ color: isDone ? "#14110d" : "#9CA3AF" }}
-                  >
+                  <p className="text-sm font-semibold" style={{ color: isDone ? "#14110d" : "#9CA3AF" }}>
                     {step.label}
                     {isActive && (
                       <span className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "#fdf5e8", color: "#b08a4a" }}>
@@ -103,17 +109,24 @@ export default function CommandeDetailPage() {
         </div>
       </div>
 
-      {/* Shipping info */}
+      {/* Delivery info */}
       <div className="bg-white rounded-2xl shadow-sm p-6">
         <h2 className="font-semibold text-sm mb-4" style={{ color: "#14110d" }}>Informations de livraison</h2>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#fdf5e8" }}>
-              <Truck size={16} style={{ color: "#b08a4a" }} />
+              {fulfillmentType === "click_and_collect"
+                ? <Store size={16} style={{ color: "#b08a4a" }} />
+                : <Truck size={16} style={{ color: "#b08a4a" }} />
+              }
             </div>
             <div>
-              <p className="text-xs font-semibold" style={{ color: "#14110d" }}>{order.shipping.carrier}</p>
-              <p className="text-xs" style={{ color: "#b08a4a99" }}>N° de suivi : {order.shipping.tracking}</p>
+              <p className="text-xs font-semibold" style={{ color: "#14110d" }}>
+                {fulfillmentType === "click_and_collect" ? "Retrait en boutique" : order.shipping.carrier}
+              </p>
+              {fulfillmentType === "livraison" && (
+                <p className="text-xs" style={{ color: "#b08a4a99" }}>N° de suivi : {order.shipping.tracking}</p>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -121,19 +134,30 @@ export default function CommandeDetailPage() {
               <MapPin size={16} style={{ color: "#b08a4a" }} />
             </div>
             <div>
-              <p className="text-xs font-semibold" style={{ color: "#14110d" }}>Adresse de livraison</p>
-              <p className="text-xs" style={{ color: "#b08a4a99" }}>{order.shipping.address}</p>
+              <p className="text-xs font-semibold" style={{ color: "#14110d" }}>
+                {fulfillmentType === "click_and_collect" ? "Adresse de la boutique" : "Adresse de livraison"}
+              </p>
+              <p className="text-xs" style={{ color: "#b08a4a99" }}>
+                {fulfillmentType === "click_and_collect"
+                  ? "Boulevard de l'OUA, Yaoundé, Cameroun"
+                  : order.shipping.address
+                }
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#fdf5e8" }}>
-              <Package size={16} style={{ color: "#b08a4a" }} />
+          {lastDone && (
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#fdf5e8" }}>
+                <Package size={16} style={{ color: "#b08a4a" }} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold" style={{ color: "#14110d" }}>Statut actuel</p>
+                <p className="text-xs" style={{ color: "#b08a4a99" }}>
+                  {lastDone.label}{lastDone.date ? ` — ${lastDone.date}` : ""}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs font-semibold" style={{ color: "#14110d" }}>Statut actuel</p>
-              <p className="text-xs" style={{ color: "#b08a4a99" }}>{lastDone?.label} — {lastDone?.date}</p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

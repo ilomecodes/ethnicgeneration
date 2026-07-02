@@ -168,6 +168,7 @@ export const orders = [
   { id: "ORD-1019", customer: "Mariam Traoré",    product: "Boubou Homme Brodé",   date: "23 Jun 2026", amount: "88 200 FCFA",  status: "Annulé" },
   { id: "ORD-1018", customer: "Hawa Camara",      product: "Ensemble Enfant Wax",  date: "22 Jun 2026", amount: "36 200 FCFA",  status: "Livré" },
   { id: "ORD-1017", customer: "Oumou Sidibé",     product: "Robe Patchwork Wax",   date: "21 Jun 2026", amount: "55 200 FCFA",  status: "En cours" },
+  { id: "ORD-1015", customer: "Amina Koné",       product: "Ensemble Enfant Wax",  date: "10 Mai 2026", amount: "72 400 FCFA",  status: "Livré" },
 ];
 
 export const orderDetails: Record<string, {
@@ -289,6 +290,20 @@ export const orderDetails: Record<string, {
       { label: "En préparation", date: "22 Jun · 09:00", done: true },
       { label: "Expédié", date: "", done: false },
       { label: "Livré", date: "", done: false },
+    ],
+    note: "",
+  },
+  "ORD-1015": {
+    customer: { name: "Amina Koné", email: "amina.kone@email.com", phone: "+33 6 12 34 56 78", address: "12 rue des Fleurs, 75011 Paris, France" },
+    items: [{ name: "Ensemble Enfant Wax", size: "6 ans", qty: 2, unitPrice: "33 000 FCFA", total: "66 000 FCFA", image: "/product-3.png" }],
+    subtotal: "66 000 FCFA", shipping: "6 400 FCFA", total: "72 400 FCFA",
+    status: "Livré", date: "10 Mai 2026",
+    timeline: [
+      { label: "Commande passée",   date: "10 Mai · 11:00", done: true },
+      { label: "Paiement confirmé", date: "10 Mai · 11:02", done: true },
+      { label: "En préparation",    date: "11 Mai · 08:30", done: true },
+      { label: "Expédié",           date: "12 Mai · 13:00", done: true },
+      { label: "Livré",             date: "14 Mai · 09:50", done: true },
     ],
     note: "",
   },
@@ -467,6 +482,20 @@ export const surMesureRequests = [
     date: "5 Jun 2026", devis: "85 000 FCFA", acompte: "42 500 FCFA", acomptePaid: true, deadline: "30 Jun 2026",
   },
 ];
+
+export type OrderFulfillment = "livraison" | "click_and_collect";
+
+export const orderMeta: Record<string, { paymentMethod: string; fulfillmentType: OrderFulfillment }> = {
+  "ORD-1024": { paymentMethod: "Visa",                    fulfillmentType: "livraison" },
+  "ORD-1023": { paymentMethod: "MTN MoMo",                fulfillmentType: "livraison" },
+  "ORD-1022": { paymentMethod: "Orange Money",            fulfillmentType: "livraison" },
+  "ORD-1021": { paymentMethod: "Mastercard",              fulfillmentType: "livraison" },
+  "ORD-1020": { paymentMethod: "Visa",                    fulfillmentType: "livraison" },
+  "ORD-1019": { paymentMethod: "MTN MoMo",                fulfillmentType: "livraison" },
+  "ORD-1018": { paymentMethod: "Paiement à la livraison", fulfillmentType: "click_and_collect" },
+  "ORD-1017": { paymentMethod: "Orange Money",            fulfillmentType: "livraison" },
+  "ORD-1015": { paymentMethod: "Mastercard",              fulfillmentType: "livraison" },
+};
 
 export const deliveryRates = [
   { id: 1, zone: "France métropolitaine", carrier: "Colissimo",   minWeight: 0, maxWeight: 2,  price: "3 200 FCFA",  delay: "2-3 jours" },

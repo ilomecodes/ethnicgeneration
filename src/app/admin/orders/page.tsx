@@ -3,23 +3,24 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Filter, Eye } from "lucide-react";
-import { orders } from "@/lib/admin-data";
+import { useOrders } from "@/context/OrdersContext";
 
 const statusColors: Record<string, { bg: string; text: string }> = {
-  Livré:     { bg: "#ECFDF5", text: "#059669" },
+  Livré:      { bg: "#ECFDF5", text: "#059669" },
   "En cours": { bg: "#fdf5e8", text: "#b08a4a" },
-  Expédié:   { bg: "#F0F9FF", text: "#0EA5E9" },
-  Annulé:    { bg: "#FEF2F2", text: "#DC2626" },
+  Expédié:    { bg: "#F0F9FF", text: "#0EA5E9" },
+  Annulé:     { bg: "#FEF2F2", text: "#DC2626" },
 };
 
 export default function OrdersPage() {
   const router = useRouter();
+  const { orderList } = useOrders();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("Tous");
 
   const statuses = ["Tous", "En cours", "Expédié", "Livré", "Annulé"];
 
-  const filtered = orders.filter((o) => {
+  const filtered = orderList.filter((o) => {
     const matchSearch =
       o.id.toLowerCase().includes(search.toLowerCase()) ||
       o.customer.toLowerCase().includes(search.toLowerCase());
@@ -31,7 +32,7 @@ export default function OrdersPage() {
     <div className="space-y-5 md:space-y-6">
       <div>
         <h1 className="text-xl md:text-2xl font-semibold text-gray-800">Commandes</h1>
-        <p className="text-sm text-gray-400 mt-0.5">{orders.length} commandes au total</p>
+        <p className="text-sm text-gray-400 mt-0.5">{orderList.length} commandes au total</p>
       </div>
 
       {/* Filters */}
