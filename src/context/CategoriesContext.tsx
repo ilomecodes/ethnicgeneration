@@ -35,7 +35,13 @@ export function CategoriesProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("eg_categories");
-      if (stored) setCategories(JSON.parse(stored));
+      if (stored) {
+        const parsed: MegaCategory[] = JSON.parse(stored);
+        // merge any seed categories that aren't in localStorage yet
+        const storedIds = new Set(parsed.map((c) => c.id));
+        const merged = [...parsed, ...seedCategories.filter((c) => !storedIds.has(c.id))];
+        setCategories(merged);
+      }
     } catch {}
     setHydrated(true);
   }, []);
