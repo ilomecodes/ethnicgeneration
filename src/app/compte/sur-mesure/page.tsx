@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { Scissors, ChevronRight } from "lucide-react";
 import { mySurMesure, statusColors } from "@/lib/client-data";
+import { useSurMesure } from "@/context/SurMesureContext";
 
 export default function MonSurMesurePage() {
+  const { liveData } = useSurMesure();
+
   return (
     <div className="space-y-4">
       <div>
@@ -16,9 +19,14 @@ export default function MonSurMesurePage() {
 
       <div className="space-y-3">
         {mySurMesure.map((sm) => {
-          const sc = statusColors[sm.status] ?? { bg: "#f3f4f6", color: "#6B7280" };
-          const doneCount = sm.pipeline.filter((p) => p.done).length;
-          const currentStep = sm.pipeline.find((p) => !p.done);
+          const live = liveData[sm.id];
+          const liveStatus = live?.status ?? sm.status;
+          const livePipeline = live?.pipeline ?? sm.pipeline;
+          const liveAcomptePaid = live?.acomptePaid ?? sm.acomptePaid;
+          const liveAcompte = live?.acompte ?? sm.acompte;
+          const sc = statusColors[liveStatus] ?? { bg: "#f3f4f6", color: "#6B7280" };
+          const doneCount = livePipeline.filter((p) => p.done).length;
+          const currentStep = livePipeline.find((p) => !p.done);
 
           return (
             <Link
@@ -43,7 +51,7 @@ export default function MonSurMesurePage() {
                     </p>
                   </div>
                   <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full flex-shrink-0" style={{ background: sc.bg, color: sc.color }}>
-                    {sm.status}
+                    {liveStatus}
                   </span>
                 </div>
 
@@ -57,7 +65,7 @@ export default function MonSurMesurePage() {
                 {/* Pipeline progress */}
                 <div className="mt-3">
                   <div className="flex items-center gap-1 mb-1.5">
-                    {sm.pipeline.map((step, i) => (
+                    {livePipeline.map((step, i) => (
                       <div
                         key={i}
                         title={step.label}
@@ -67,16 +75,16 @@ export default function MonSurMesurePage() {
                     ))}
                   </div>
                   <p className="text-[10px]" style={{ color: "#b08a4a99" }}>
-                    Étape {doneCount}/{sm.pipeline.length}
+                    Étape {doneCount}/{livePipeline.length}
                     {currentStep ? ` · Prochain : ${currentStep.label}` : " · Terminé"}
                   </p>
                 </div>
 
                 {/* Acompte notice */}
-                {!sm.acomptePaid && (
+                {!liveAcomptePaid && liveAcompte && (
                   <div className="mt-3 flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium" style={{ background: "#fef9c3", color: "#854d0e" }}>
                     <span>⚠</span>
-                    Acompte de {sm.acompte} en attente de règlement.
+                    Acompte de {liveAcompte} en attente de règlement.
                   </div>
                 )}
               </div>

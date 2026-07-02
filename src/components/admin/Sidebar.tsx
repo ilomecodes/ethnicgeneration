@@ -10,6 +10,7 @@ import {
   Truck,
   BarChart2,
   Scissors,
+  FileText,
   ChevronDown,
   ChevronRight,
   X,
@@ -41,6 +42,7 @@ const nav = [
       { href: "/admin/sur-mesure/options", label: "Options de finition" },
     ],
   },
+  { href: "/admin/factures", label: "Factures", icon: FileText },
   { href: "/admin/rates", label: "Tarifs livraison", icon: Truck },
   { href: "/admin/reports", label: "Rapports", icon: BarChart2 },
 ];

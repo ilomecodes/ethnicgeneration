@@ -4,15 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, Scissors } from "lucide-react";
 import { surMesureRequests } from "@/lib/admin-data";
+import { useSurMesure, PIPELINE_STEPS } from "@/context/SurMesureContext";
 
-const STATUS_PIPELINE = [
-  "Demande reçue",
-  "Devis envoyé",
-  "Acompte reçu",
-  "En production",
-  "Prêt à expédier",
-  "Livré",
-];
+const STATUS_PIPELINE = PIPELINE_STEPS;
 
 const statusColor: Record<string, { bg: string; text: string }> = {
   "Demande reçue":   { bg: "#F4F3FF", text: "#6B7280" },
@@ -26,14 +20,16 @@ const statusColor: Record<string, { bg: string; text: string }> = {
 
 export default function SurMesureAdminPage() {
   const router = useRouter();
+  const { liveData } = useSurMesure();
   const [filter, setFilter] = useState("Tous");
 
-  const filtered = surMesureRequests.filter(
-    (r) => filter === "Tous" || r.status === filter
-  );
+  const filtered = surMesureRequests.filter((r) => {
+    const liveStatus = liveData[r.id]?.status ?? r.status;
+    return filter === "Tous" || liveStatus === filter;
+  });
 
   const counts = STATUS_PIPELINE.reduce<Record<string, number>>((acc, s) => {
-    acc[s] = surMesureRequests.filter((r) => r.status === s).length;
+    acc[s] = surMesureRequests.filter((r) => (liveData[r.id]?.status ?? r.status) === s).length;
     return acc;
   }, {});
 
@@ -95,7 +91,9 @@ export default function SurMesureAdminPage() {
             </thead>
             <tbody className="divide-y divide-gray-50">
               {filtered.map((req) => {
-                const sc = statusColor[req.status] ?? { bg: "#F3F4F6", text: "#6B7280" };
+                const liveStatus = liveData[req.id]?.status ?? req.status;
+                const liveDevis = liveData[req.id]?.devis ?? req.devis;
+                const sc = statusColor[liveStatus] ?? { bg: "#F3F4F6", text: "#6B7280" };
                 return (
                   <tr
                     key={req.id}
@@ -122,11 +120,11 @@ export default function SurMesureAdminPage() {
                     <td className="px-4 md:px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{req.wax}</td>
                     <td className="px-4 md:px-6 py-4 text-sm text-gray-400 whitespace-nowrap">{req.date}</td>
                     <td className="px-4 md:px-6 py-4 text-sm font-semibold whitespace-nowrap" style={{ color: "#b08a4a" }}>
-                      {req.devis ?? <span className="text-gray-300 font-normal">—</span>}
+                      {liveDevis ?? <span className="text-gray-300 font-normal">—</span>}
                     </td>
                     <td className="px-4 md:px-6 py-4">
                       <span className="text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap" style={{ background: sc.bg, color: sc.text }}>
-                        {req.status}
+                        {liveStatus}
                       </span>
                     </td>
                     <td className="px-4 md:px-6 py-4">
