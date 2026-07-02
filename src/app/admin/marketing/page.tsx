@@ -6,7 +6,7 @@ import { Plus, Tag, Percent, Trash2, Copy } from "lucide-react";
 const promos = [
   { id: 1, code: "BIENVENUE10", type: "Pourcentage", value: "10%", uses: 23, limit: 100, expires: "31 Jul 2026", active: true },
   { id: 2, code: "ETE2026", type: "Pourcentage", value: "15%", uses: 8, limit: 50, expires: "31 Aoû 2026", active: true },
-  { id: 3, code: "FIDELITE5", type: "Montant fixe", value: "5 €", uses: 41, limit: null, expires: null, active: true },
+  { id: 3, code: "FIDELITE5", type: "Montant fixe", value: "3 000 FCFA", uses: 41, limit: null, expires: null, active: true },
   { id: 4, code: "NOEL2025", type: "Pourcentage", value: "20%", uses: 88, limit: 100, expires: "31 Déc 2025", active: false },
 ];
 

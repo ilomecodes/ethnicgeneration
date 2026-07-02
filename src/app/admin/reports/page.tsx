@@ -39,7 +39,7 @@ function MiniLineChart({
 }
 
 const reportCards = [
-  { label: "Chiffre d'affaires", value: "12 890 €", change: "+6.9%", positive: true, icon: TrendingUp, color: "#b08a4a", data: salesData },
+  { label: "Chiffre d'affaires", value: "12 890 000 FCFA", change: "+6.9%", positive: true, icon: TrendingUp, color: "#b08a4a", data: salesData },
   { label: "Commandes livrées", value: "1 243", change: "+3.1%", positive: true, icon: Truck, color: "#059669", data: visitData.map(v => Math.floor(v / 20)) },
   { label: "Nouveaux clients", value: "318", change: "-2.4%", positive: false, icon: Users, color: "#DC2626", data: [28, 32, 25, 30, 27, 35, 22] },
   { label: "Produits vendus", value: "2 847", change: "+11.2%", positive: true, icon: Package, color: "#D97706", data: salesData.map(v => v * 3) },
@@ -95,13 +95,13 @@ export default function ReportsPage() {
               <tr>
                 <td className="py-3 text-xs font-medium" style={{ color: "#b08a4a" }}>2026</td>
                 {salesData.map((v, i) => (
-                  <td key={i} className="py-3 text-center text-xs text-gray-600">{v}K€</td>
+                  <td key={i} className="py-3 text-center text-xs text-gray-600">{v}K FCFA</td>
                 ))}
               </tr>
               <tr>
                 <td className="py-3 text-xs font-medium text-gray-400">2025</td>
                 {salesDataPrev.map((v, i) => (
-                  <td key={i} className="py-3 text-center text-xs text-gray-400">{v}K€</td>
+                  <td key={i} className="py-3 text-center text-xs text-gray-400">{v}K FCFA</td>
                 ))}
               </tr>
               <tr>

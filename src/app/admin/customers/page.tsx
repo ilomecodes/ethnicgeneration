@@ -14,7 +14,7 @@ export default function CustomersPage() {
   );
 
   const totalSpent = customers.reduce(
-    (sum, c) => sum + parseFloat(c.spent.replace(",", ".").replace(" €", "")),
+    (sum, c) => sum + parseInt(c.spent.replace(/[^\d]/g, ""), 10),
     0
   );
   const totalOrders = customers.reduce((sum, c) => sum + c.orders, 0);
@@ -37,7 +37,7 @@ export default function CustomersPage() {
           <p className="text-xs text-gray-400 mt-1">Commandes passées</p>
         </div>
         <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm">
-          <p className="text-xl md:text-2xl font-bold text-gray-800 truncate">{totalSpent.toFixed(2).replace(".", ",")} €</p>
+          <p className="text-xl md:text-2xl font-bold text-gray-800 truncate">{totalSpent.toLocaleString("fr-FR")} FCFA</p>
           <p className="text-xs text-gray-400 mt-1">Chiffre d&apos;affaires total</p>
         </div>
       </div>
